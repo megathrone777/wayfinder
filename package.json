@@ -1,0 +1,56 @@
+{
+  "author": {
+    "email": "megathrone3333@gmail.com",
+    "name": "Andrii Taranenko"
+  },
+  "browserslist": [
+    "chrome 111",
+    "edge 111",
+    "firefox 111",
+    "safari 16.4"
+  ],
+  "dependencies": {
+    "@vanilla-extract/css": "^1.21.1",
+    "@vanilla-extract/css-utils": "^0.1.6",
+    "@vanilla-extract/dynamic": "^2.1.5",
+    "@vercel/blob": "^2.5.0",
+    "next": "16.2.10",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint-react/eslint-plugin": "^5.11.0",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^26.1.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vanilla-extract/next-plugin": "^2.5.2",
+    "eslint": "^10.6.0",
+    "eslint-plugin-perfectionist": "^5.9.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
+    "prettier": "^3.9.4",
+    "typescript": "^6",
+    "typescript-eslint": "^8.62.1",
+    "undici": "^8.5.0"
+  },
+  "name": "wayfinder",
+  "private": true,
+  "scripts": {
+    "build": "jest --ci --runInBand && yarn lint && next build --turbopack",
+    "dev": "next dev --turbopack",
+    "lint": "eslint ./src --config eslint.config.ts --flag unstable_native_nodejs_ts_config",
+    "start": "next start",
+    "test": "jest",
+    "typegen": "next typegen"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}
