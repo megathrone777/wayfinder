@@ -1,70 +1,81 @@
 import { rgba, style, styleVariants } from "@/theme";
 
-export const buttonClass = styleVariants(
-  ({ devices }) => ({
+export const buttonSizeClass = styleVariants(
+  {
     normal: {
-      fontSize: 17,
-      height: 45,
-      minWidth: 140,
-      paddingInline: 10,
-
-      "@media": {
-        [devices.tablet]: {
-          fontSize: 18,
-          height: 46,
-          minWidth: 155,
-        },
-
-        [devices.desktop]: {
-          fontSize: 21,
-          height: 55,
-          minWidth: 190,
-          paddingInline: 15,
-        },
-      },
+      borderRadius: 10,
+      columnGap: 6,
+      fontSize: 15,
+      height: 42,
+      paddingInline: 18,
     },
 
     small: {
-      fontSize: 16,
-      height: 36,
-      minWidth: 36,
-      paddingInline: 4,
+      borderRadius: 8,
+      columnGap: 5,
+      fontSize: 14,
+      height: 33,
+      paddingInline: 13,
+    },
+  },
+
+  (size) => size
+);
+
+export const buttonTemplateClass = styleVariants(
+  ({ colors }) => ({
+    primary: {
+      backgroundColor: colors.blue,
+      boxShadow: `${rgba(colors.blue, 0.4)} 0 4px 18px`,
+      color: colors.black,
+
+      ":hover": {
+        backgroundColor: colors.blueLighter,
+      },
+    },
+
+    secondary: {
+      backgroundColor: colors.green,
+      color: colors.black,
+
+      ":hover": {
+        backgroundColor: colors.greenLighter,
+      },
+    },
+
+    tertiary: {
+      backgroundColor: colors.blackDarker,
+      border: `1px solid ${rgba("255, 255, 255", 0.17)}`,
+      color: colors.whiteDarker,
+
+      ":hover": {
+        backgroundColor: colors.blackLighter,
+      },
     },
   }),
 
-  (template, { colors, easing }) => [
-    {
-      alignItems: "center",
-      backgroundColor: colors.red,
-      border: "none",
-      borderRadius: 5,
-      boxShadow: `0 0 10px 0 ${rgba(colors.black, 0.5)}`,
-      color: "white",
-      display: "inline-grid",
-      fontWeight: 500,
-      justifyContent: "center",
-      lineHeight: 1,
-      outline: "none",
-      textDecoration: "none",
-      transition: `box-shadow 0.2s ${easing}`,
-      userSelect: "none",
-
-      ":disabled": {
-        cursor: "default",
-        opacity: 0.7,
-      },
-
-      ":hover": {
-        boxShadow: `0 0 14px 0 ${rgba(colors.red, 0.75)}`,
-      },
-    },
-
-    template,
-  ]
+  (template) => [{}, template]
 );
+
+export const buttonClass = style(({ easing }) => ({
+  alignItems: "center",
+  display: "inline-flex",
+  fontWeight: 600,
+  justifyContent: "center",
+  lineHeight: 1,
+  outline: "none",
+  textDecoration: "none",
+  transition: `background-color 0.25s ${easing}`,
+  userSelect: "none",
+
+  ":disabled": {
+    cursor: "not-allowed",
+    opacity: 0.7,
+  },
+}));
 
 export const iconClass = style({
   color: "white",
-  minWidth: 18,
-  width: 18,
+  height: 16,
+  minWidth: 16,
 });

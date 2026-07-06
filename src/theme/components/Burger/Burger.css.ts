@@ -12,16 +12,17 @@ export const buttonClass = styleVariants(
       backgroundColor: "transparent",
       border: "none",
       cursor: "pointer",
-      display: "grid",
-      gridAutoFlow: "row",
-      height: 35,
-      padding: 0,
+      display: "flex",
+      flexDirection: "column",
+      height: 40,
+      justifyContent: "space-between",
+      padding: 4,
+      transformOrigin: "center",
       transition: "transform 330ms ease-out",
-      width: 35,
+      width: 40,
     },
-    {
-      transform,
-    },
+
+    { transform },
   ]
 );
 
@@ -35,6 +36,7 @@ export const lineClass = styleVariants(
       transformOrigin: "right",
       width: "50%",
     },
+
     leftOpened: {
       alignSelf: "auto",
       isOpened: true,
@@ -43,22 +45,25 @@ export const lineClass = styleVariants(
       transformOrigin: "right",
       width: "50%",
     },
+
     middle: {
       alignSelf: "center",
       isOpened: false,
       justifySelf: "auto",
       transform: "none",
-      transformOrigin: "none",
+      transformOrigin: "unset",
       width: "100%",
     },
+
     middleOpened: {
       alignSelf: "center",
       isOpened: true,
       justifySelf: "auto",
       transform: "none",
-      transformOrigin: "none",
+      transformOrigin: "unset",
       width: "100%",
     },
+
     right: {
       alignSelf: "end",
       isOpened: false,
@@ -67,6 +72,7 @@ export const lineClass = styleVariants(
       transformOrigin: "left",
       width: "50%",
     },
+
     rightOpened: {
       alignSelf: "end",
       isOpened: true,
@@ -76,16 +82,19 @@ export const lineClass = styleVariants(
       width: "50%",
     },
   },
-  ({ alignSelf, isOpened, justifySelf, transform, transformOrigin, width }, { colors }) => ({
+
+  (
+    { alignSelf, isOpened, justifySelf, transform, transformOrigin, width },
+    { colors, easing }
+  ) => ({
     alignSelf,
-    backgroundColor: isOpened ? colors.red : "white",
+    backgroundColor: isOpened ? colors.blue : colors.white,
     borderRadius: 5,
     height: 4,
     justifySelf,
-    opacity: 0.9,
     transform,
     transformOrigin,
-    transition: "transform 330ms cubic-bezier(0.54, -0.81, 0.57, 0.57)",
+    transition: `transform 330ms ${easing}`,
     width,
   })
 );

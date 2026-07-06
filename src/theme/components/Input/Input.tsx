@@ -3,22 +3,13 @@ import React, { useId, useState } from "react";
 
 import { Icon } from "@/ui";
 
-import {
-  errorIconClass,
-  iconClass,
-  iconHolderClass,
-  inputClass,
-  labelClass,
-  layoutClass,
-  wrapperClass,
-} from "./Input.css";
+import { errorIconClass, inputClass, labelClass, wrapperClass } from "./Input.css";
 
 import type { TProps } from "./Input.types";
 
 const cyrillicRegex = /[Ѐ-ӿԀ-ԯⷠ-ⷿꙀ-ꚟ]/;
 
 const Input: React.FC<TProps> = ({
-  iconId,
   isError,
   label,
   onBeforeInput,
@@ -70,44 +61,22 @@ const Input: React.FC<TProps> = ({
         </label>
       )}
 
-      <div
-        className={layoutClass}
-        style={{
-          gridTemplateColumns: iconId
-            ? showError
-              ? "auto 1fr auto"
-              : "auto 1fr"
-            : showError
-              ? "1fr auto"
-              : "1fr",
-        }}
-      >
-        {iconId && (
-          <div className={iconHolderClass}>
-            <Icon
-              className={iconClass}
-              id={iconId}
-            />
-          </div>
-        )}
+      <input
+        autoComplete="new-password"
+        className={inputClass[showError ? "error" : "default"]}
+        id={inputId}
+        onBeforeInput={handleBeforeInput}
+        onBlur={handleBlur}
+        spellCheck="false"
+        {...rest}
+      />
 
-        <input
-          autoComplete="new-password"
-          className={inputClass[showError ? "error" : "default"]}
-          id={inputId}
-          onBeforeInput={handleBeforeInput}
-          onBlur={handleBlur}
-          spellCheck="false"
-          {...rest}
+      {showError && (
+        <Icon
+          className={errorIconClass}
+          id="exclamation"
         />
-
-        {showError && (
-          <Icon
-            className={errorIconClass}
-            id="exclamation"
-          />
-        )}
-      </div>
+      )}
     </div>
   );
 };

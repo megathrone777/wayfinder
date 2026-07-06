@@ -9,6 +9,6 @@ export interface TProps extends DetailedHTMLProps<
 > {
   href?: LinkProps<string>["href"];
   iconId?: null | TIconId;
-  target?: HTMLAnchorElement["target"];
-  template?: "normal" | "small";
+  size?: "normal" | "small";
+  template?: "primary" | "secondary" | "tertiary";
 }

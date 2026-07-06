@@ -1,14 +1,11 @@
 import { globalStyle } from "@/theme";
 
 globalStyle(".error", ({ devices }) => ({
-  alignContent: "center",
   alignItems: "center",
-  display: "grid",
-  gridAutoFlow: "row",
-  gridTemplateRows: "auto 320px auto",
+  display: "flex",
+  flexDirection: "column",
   height: "100%",
   justifyContent: "center",
-  justifyItems: "center",
   padding: "35px 10px",
   rowGap: 30,
   width: "100%",
@@ -25,12 +22,6 @@ globalStyle(".error", ({ devices }) => ({
     },
   },
 }));
-
-globalStyle(".error__image", {
-  display: "inline-block",
-  height: "100%",
-  width: "auto",
-});
 
 globalStyle(".error__title", ({ devices }) => ({
   fontSize: 34,

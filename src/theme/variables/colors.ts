@@ -1,12 +1,20 @@
 const colors = {
-  amber: "#ffd43b",
-  black: "#050404",
+  amber: "#e0a53a",
+  black: "#0f1216",
+  blackDarker: "#141821",
+  blackLighter: "#2a323b",
   blue: "#4f8cff",
-  gray: "#707171",
+  blueLighter: "#6596f1",
+  gray: "#98a0aa",
+  grayDarker: "#252c37",
+  grayDarkest: "#191e26",
   green: "#4fd08a",
+  greenLighter: "#5dda95",
   red: "#da2629",
   white: "#f4f6f8",
-  yellow: "#e6c85a",
+  whiteDarker: "#d6dbe2",
+  whiteDarkest: "#8a919b",
+  whiteLighter: "#eef1f5",
 };
 
 export { colors };

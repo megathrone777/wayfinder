@@ -3,6 +3,10 @@ const rgba = (color: string, alpha: number): string => {
     return `color-mix(in srgb, ${color} ${alpha * 100}%, transparent)`;
   }
 
+  if (/^\d/.test(color)) {
+    return `rgba(${color}, ${alpha})`;
+  }
+
   const normalized =
     color.length === 4
       ? `#${color[1]}${color[1]}${color[2]}${color[2]}${color[3]}${color[3]}`

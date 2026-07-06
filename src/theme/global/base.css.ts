@@ -1,15 +1,31 @@
-import { globalStyle } from "@/theme";
+import { globalStyle, rgba } from "@/theme";
+
+globalStyle("::-webkit-scrollbar", {
+  height: 11,
+  width: 11,
+});
+
+globalStyle("::-webkit-scrollbar-track", {
+  borderRadius: 10,
+});
+
+globalStyle("::-webkit-scrollbar-thumb", {
+  backgroundColor: rgba("255, 255, 255", 0.16),
+  borderRadius: 6,
+});
+
+globalStyle("::-webkit-scrollbar-thumb:hover", {
+  backgroundColor: rgba("255, 255, 255", 0.4),
+});
 
 globalStyle("html, body", {
   height: "100%",
   width: "100%",
 });
 
-globalStyle("html", {
-  overflowY: "scroll",
-});
-
-globalStyle("body", ({ fonts }) => ({
+globalStyle("body", ({ colors, fonts }) => ({
+  backgroundColor: colors.black,
+  color: colors.white,
   font: `16px ${fonts.spaceGrotesk}`,
   minWidth: 340,
   MozOsxFontSmoothing: "grayscale",
@@ -18,6 +34,10 @@ globalStyle("body", ({ fonts }) => ({
 
 globalStyle("button", {
   cursor: "pointer",
+});
+
+globalStyle("a:focus, button:focus", {
+  outline: "none",
 });
 
 globalStyle("svg", {

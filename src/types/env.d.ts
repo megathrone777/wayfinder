@@ -1,8 +1,10 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      BLOB_READ_WRITE_TOKEN: string;
-
+      ANTHROPIC_API_KEY: string;
+      EMAIL_ADDRESS: string;
+      EMAIL_APP_PASSWORD: string;
+      FLIGHTS_API_URL: string;
       PUBLIC_URL: string;
     }
   }

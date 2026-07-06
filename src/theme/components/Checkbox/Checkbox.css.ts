@@ -3,8 +3,7 @@ import { style, styleVariants } from "@/theme";
 export const wrapperClass = style(({ devices }) => ({
   alignItems: "start",
   columnGap: 5,
-  display: "grid",
-  gridAutoFlow: "column",
+  display: "flex",
   justifyContent: "start",
 
   "@media": {
@@ -31,12 +30,11 @@ export const layoutClass = styleVariants(
 
   (template, { colors }) => [
     {
-      alignContent: "center",
       alignItems: "center",
       border: `2px solid ${colors.red}`,
       borderRadius: "50%",
       color: colors.red,
-      display: "grid",
+      display: "flex",
       justifyContent: "center",
       overflow: "hidden",
       position: "relative",

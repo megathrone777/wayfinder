@@ -1,16 +1,8 @@
 import { style, styleVariants } from "@/theme";
 
 export const wrapperClass = style({
-  display: "grid",
+  display: "flex",
 });
-
-export const layoutClass = style(({ colors }) => ({
-  alignItems: "center",
-  borderBottom: `2px solid ${colors.red}`,
-  display: "grid",
-  gridAutoFlow: "column",
-  justifyContent: "start",
-}));
 
 export const labelClass = style({
   cursor: "pointer",
@@ -35,7 +27,7 @@ export const inputClass = styleVariants(
       },
 
       "::placeholder": {
-        color: colors.gray,
+        color: colors.blackDarker,
       },
     },
 
@@ -91,20 +83,6 @@ export const inputClass = styleVariants(
     template,
   ]
 );
-
-export const iconHolderClass = style({
-  alignItems: "center",
-  display: "grid",
-  justifyContent: "center",
-  minWidth: 30,
-  width: 30,
-});
-
-export const iconClass = style(({ colors }) => ({
-  color: colors.red,
-  minWidth: 18,
-  width: 18,
-}));
 
 export const errorIconClass = style(({ colors }) => ({
   color: colors.red,

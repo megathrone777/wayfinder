@@ -8,7 +8,6 @@ const Burger: React.FC<TProps> = ({ isOpened, onClick }) => (
   <button
     {...{ onClick }}
     className={buttonClass[isOpened ? "isOpened" : "default"]}
-    title="Menu trigger."
     type="button"
   >
     <span className={lineClass[isOpened ? "leftOpened" : "left"]} />
