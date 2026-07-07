@@ -23,23 +23,33 @@ export const buttonSizeClass = styleVariants(
 );
 
 export const buttonTemplateClass = styleVariants(
-  ({ colors }) => ({
+  ({ colors, devices }) => ({
     primary: {
       backgroundColor: colors.blue,
+      border: "1px solid transparent",
       boxShadow: `${rgba(colors.blue, 0.4)} 0 4px 18px`,
       color: colors.black,
 
-      ":hover": {
-        backgroundColor: colors.blueLighter,
+      "@media": {
+        [devices.pointerFine]: {
+          ":hover": {
+            backgroundColor: colors.blueLighter,
+          },
+        },
       },
     },
 
     secondary: {
       backgroundColor: colors.green,
+      border: "1px solid transparent",
       color: colors.black,
 
-      ":hover": {
-        backgroundColor: colors.greenLighter,
+      "@media": {
+        [devices.pointerFine]: {
+          ":hover": {
+            backgroundColor: colors.greenLighter,
+          },
+        },
       },
     },
 
@@ -48,13 +58,17 @@ export const buttonTemplateClass = styleVariants(
       border: `1px solid ${rgba("255, 255, 255", 0.17)}`,
       color: colors.whiteDarker,
 
-      ":hover": {
-        backgroundColor: colors.blackLighter,
+      "@media": {
+        [devices.pointerFine]: {
+          ":hover": {
+            backgroundColor: colors.blackLighter,
+          },
+        },
       },
     },
   }),
 
-  (template) => [{}, template]
+  (template) => template
 );
 
 export const buttonClass = style(({ easing }) => ({
@@ -67,6 +81,7 @@ export const buttonClass = style(({ easing }) => ({
   textDecoration: "none",
   transition: `background-color 0.25s ${easing}`,
   userSelect: "none",
+  whiteSpace: "nowrap",
 
   ":disabled": {
     cursor: "not-allowed",
@@ -75,7 +90,8 @@ export const buttonClass = style(({ easing }) => ({
 }));
 
 export const iconClass = style({
-  color: "white",
-  height: 16,
-  minWidth: 16,
+  color: "inherit",
+  height: 15,
+  minWidth: 15,
+  transform: "translateY(1px)",
 });

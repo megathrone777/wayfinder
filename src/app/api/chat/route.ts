@@ -1,15 +1,14 @@
-import { ai } from "@/services";
+import { streamMessages } from "@/services";
 
-import type { UIMessage } from "ai";
 import type { NextRequest } from "next/server";
 
 interface TRequestData {
   autonomyMode: TAgentAutonomyMode;
-  messages: UIMessage[];
+  messages: TAgentUIMessage[];
 }
 
 export const POST = async (request: NextRequest): Promise<Response> => {
-  const { messages } = (await request.json()) as TRequestData;
+  const { autonomyMode, messages } = (await request.json()) as TRequestData;
 
-  return await ai.streamMessages(messages);
+  return await streamMessages(messages, autonomyMode);
 };

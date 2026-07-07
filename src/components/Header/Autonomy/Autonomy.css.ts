@@ -9,8 +9,9 @@ export const wrapperClass = style({
 export const titleClass = style(({ colors, devices, fonts }) => ({
   color: colors.whiteDarkest,
   fontFamily: fonts.jetBrainsMono,
-  fontSize: 12,
+  fontSize: 11,
   letterSpacing: 1,
+  lineHeight: 1,
   textTransform: "uppercase",
 
   "@media": {
@@ -32,24 +33,38 @@ export const buttonClass = styleVariants(
       backgroundColor: colors.grayDarker,
       borderColor: rgba(colors.blue, 0.55),
       color: colors.whiteLighter,
+
+      ":hover": {
+        borderColor: colors.blueLighter,
+      },
     },
 
     default: {
+      backgroundColor: colors.grayDarkest,
       borderColor: rgba("255, 255, 255", 0.1),
+
+      ":hover": {
+        backgroundColor: colors.grayDarker,
+        borderColor: rgba(colors.blue, 0.55),
+        color: colors.whiteLighter,
+      },
     },
   }),
 
-  (variant, { colors }) => [
+  (variant, { colors, easing }) => [
     {
-      backgroundColor: "transparent",
       borderRadius: 9,
       borderStyle: "solid",
       borderWidth: 1,
       color: colors.gray,
       fontSize: 14,
       fontWeight: 600,
-      padding: "10px 13px",
+      height: 40,
+      paddingInline: 13,
       textAlign: "left",
+      transitionDuration: ".15s",
+      transitionProperty: "background-color, border-color, color",
+      transitionTimingFunction: easing,
       whiteSpace: "nowrap",
       width: "100%",
     },

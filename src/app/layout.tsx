@@ -6,7 +6,7 @@ import "@/theme/global";
 
 import { fontJetBrainsMono, fontSpaceGrotesk } from "./fonts";
 
-import { layoutClass } from "./layout.css";
+import { wrapperClass, layoutClass } from "./layout.css";
 
 const RootLayout: React.FC<LayoutProps<"/">> = ({ children }) => (
   <html
@@ -14,8 +14,10 @@ const RootLayout: React.FC<LayoutProps<"/">> = ({ children }) => (
     lang="en"
   >
     <body>
-      <Header />
-      <div className={layoutClass}>{children}</div>
+      <div className={wrapperClass}>
+        <Header />
+        <div className={layoutClass}>{children}</div>
+      </div>
     </body>
   </html>
 );

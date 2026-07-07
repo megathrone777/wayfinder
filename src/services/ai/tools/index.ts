@@ -1,3 +1,11 @@
-export { bookTrip } from "./bookTrip";
-export { searchFlights } from "./searchFlights";
-export { searchHotels } from "./searchHotels";
+import { bookTrip } from "./bookTrip";
+import { searchFlights } from "./searchFlights";
+import { searchHotels } from "./searchHotels";
+
+const tools = {
+  bookTrip,
+  searchFlights,
+  searchHotels,
+};
+
+export { tools };

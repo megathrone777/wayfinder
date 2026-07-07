@@ -5,9 +5,11 @@ declare global {
   }
 
   interface TBooking {
-    clientEmail: string;
-    currency: string;
-    id: string;
+    bookedAt: string;
+    clientEmail?: string;
+    confirmed: boolean;
+    currency?: string;
+    itinerarySummary: string;
     totalPrice: number;
   }
 

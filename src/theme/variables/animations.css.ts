@@ -17,7 +17,7 @@ const animations = {
     from: {
       opacity: 0,
       pointerEvents: "none",
-      transform: "translate3d(0, -4px, 0)",
+      transform: "translate3d(0, -6px, 0)",
     },
 
     to: {
@@ -31,13 +31,13 @@ const animations = {
     from: {
       opacity: 0,
       pointerEvents: "none",
-      transform: "translate3d(0, 15px, 0)",
+      transform: "translate3d(0, 0, 0)",
     },
 
     to: {
       opacity: 1,
       pointerEvents: "auto",
-      transform: "translate3d(0, 0, 0)",
+      transform: "translate3d(0, -6px, 0)",
     },
   }),
 

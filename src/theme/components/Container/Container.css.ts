@@ -1,6 +1,7 @@
 import { style } from "@/theme";
 
 export const wrapperClass = style(({ devices }) => ({
+  height: "100%",
   paddingInline: 16,
   width: "100%",
 

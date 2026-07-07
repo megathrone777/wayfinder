@@ -1,18 +1,28 @@
-import { bookTrip, searchFlights, searchHotels } from "./tools";
+import { tools } from "./tools";
 
-const combineTools = (autonomyMode: TAgentAutonomyMode) => {
-  const needsConfirm = (isBooking: boolean) => {
-    if (autonomyMode === "ask-always") return true;
-    if (autonomyMode === "ask-before-booking") return isBooking;
+import type { ToolSet } from "ai";
 
-    return false;
-  };
+const combineTools = (autonomyMode: TAgentAutonomyMode): ToolSet => {
+  if (autonomyMode === "auto") {
+    return {
+      ...tools,
+      bookTrip: {
+        ...tools.bookTrip,
 
-  return {
-    bookTrip,
-    searchFlights,
-    searchHotels,
-  };
+        execute: ({
+          itinerarySummary,
+          totalPrice,
+        }: Pick<TBooking, "itinerarySummary" | "totalPrice">): TBooking => ({
+          bookedAt: new Date().toISOString(),
+          confirmed: true,
+          itinerarySummary,
+          totalPrice,
+        }),
+      },
+    };
+  }
+
+  return tools;
 };
 
 export { combineTools };

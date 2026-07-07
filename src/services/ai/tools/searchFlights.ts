@@ -1,21 +1,20 @@
-import { tool, type Tool } from "ai";
+import { tool } from "ai";
 import { z } from "zod/v4";
 
-interface TInput {
-  cityFrom: string;
-  cityTo: string;
-}
-
-type TOutput = TFlight & TInput;
-
-const searchFlights: Tool<TInput, TOutput[]> = tool({
+const searchFlights = tool({
   description: "Search available flights between two cities",
-  execute: async ({ cityFrom, cityTo }) => {
-    const response = await fetch(process.env.FLIGHTS_API_URL);
-    const data = (await response.json()) as TFlight[];
 
-    return data.map((flight: TFlight): TOutput => ({ ...flight, cityFrom, cityTo }));
+  execute: async ({ cityFrom = "Prague", cityTo }) => {
+    const response = await fetch(process.env.FLIGHTS_API_URL);
+    const { data: flights } = (await response.json()) as { data: TFlight[] };
+
+    if (response.ok && !!flights.length) {
+      return flights.map<TFlight>((flight: TFlight) => ({ ...flight, cityFrom, cityTo }));
+    }
+
+    return [];
   },
+
   inputSchema: z.object({
     cityFrom: z.string().describe("Origin city or airport"),
     cityTo: z.string().describe("Destination city or airport"),

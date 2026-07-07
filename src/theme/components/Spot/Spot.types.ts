@@ -1,3 +1,3 @@
 export interface TProps {
-  status: TAgentStatus;
+  activity: TAgentActivity;
 }

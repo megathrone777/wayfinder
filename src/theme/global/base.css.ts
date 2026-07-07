@@ -34,6 +34,7 @@ globalStyle("body", ({ colors, fonts }) => ({
 
 globalStyle("button", {
   cursor: "pointer",
+  lineHeight: 1,
 });
 
 globalStyle("a:focus, button:focus", {

@@ -25,7 +25,7 @@ const sendBookingEmail = async (booking: TBooking): Promise<boolean> => {
     const info = await transporter.sendMail({
       from: emailAddress,
       html,
-      subject: `${process.env.PUBLIC_URL?.replace(/^https?:\/\//, "") ?? ""}: Booking confirmation #${booking.id}`,
+      subject: `${process.env.PUBLIC_URL?.replace(/^https?:\/\//, "") ?? ""}: Booking confirmation №489`,
       to: booking.clientEmail,
     });
 

@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Agent, Canvas } from "@/components";
+import { Agent, Output } from "@/components";
 
 const Page: React.FC = () => (
   <>
     <Agent />
-    <Canvas />
+    <Output />
   </>
 );
 

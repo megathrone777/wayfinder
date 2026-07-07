@@ -1,6 +1,21 @@
+import type { tools } from "@/services/ai/tools";
+
+import type { InferUITools, UIMessage } from "ai";
+
 declare global {
-  type TAgentStatus = "confirmed" | "idle" | "processing" | "waiting";
+  type TAgentTools = InferUITools<typeof tools>;
+  type TAgentUIMessage = UIMessage<unknown, Record<string, never>, TAgentTools>;
   type TAgentAutonomyMode = "ask-always" | "ask-before-booking" | "auto";
+
+  type TAgentActivity =
+    | "booking"
+    | "building-itinerary"
+    | "idle"
+    | "searching-flights"
+    | "searching-stays"
+    | "trip-confirmed"
+    | "trip-rejected"
+    | "waiting";
 
   interface TAgentAutonomy {
     label: string;
