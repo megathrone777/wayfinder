@@ -3,17 +3,6 @@ import type { ChatStatus } from "ai";
 type TAgentPart = TAgentUIMessage["parts"][number];
 type TToolPartState = Extract<TAgentUIMessage["parts"][number], { state: string }>["state"];
 
-export const activityLabel: Record<TAgentActivity, string> = {
-  booking: "Booking...",
-  "building-itinerary": "Building itinerary...",
-  idle: "Idle",
-  "searching-flights": "Searching flights...",
-  "searching-stays": "Searching stays...",
-  "trip-confirmed": "Trip confirmed",
-  "trip-rejected": "Booking declined",
-  waiting: "Waiting for you",
-};
-
 const isBookTripPart = (part: TAgentPart): part is Extract<TAgentPart, { type: "tool-bookTrip" }> =>
   part.type === "tool-bookTrip";
 

@@ -4,6 +4,7 @@ export const wrapperClass = style(({ colors, devices }) => ({
   backgroundColor: colors.blackDarker,
   display: "flex",
   flexDirection: "column",
+  height: "100%",
   overflow: "hidden",
   width: "100%",
 
@@ -15,15 +16,11 @@ export const wrapperClass = style(({ colors, devices }) => ({
   },
 }));
 
-export const layoutClass = style({
-  flexGrow: 1,
-  overflow: "hidden",
-  width: "100%",
-});
-
 export const contentClass = style({
   display: "flex",
   flexDirection: "column",
+  flexGrow: 1,
   height: "100%",
-  paddingTop: 24,
+  overflow: "hidden",
+  width: "100%",
 });

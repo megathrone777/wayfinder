@@ -3,7 +3,7 @@ import { rgba, style } from "@/theme";
 export const wrapperClass = style({
   display: "flex",
   flexDirection: "column",
-  paddingBottom: 20,
+  padding: "4px 16px 0",
   rowGap: 10,
 });
 

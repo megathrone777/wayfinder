@@ -32,6 +32,10 @@ export const wrapperClass = style(({ colors }) => ({
     backgroundColor: colors.green,
   },
 
+  "&.trip-rejected": {
+    backgroundColor: colors.redLighter,
+  },
+
   "&.waiting": {
     animation: `${pulse} 1.1s ease-in-out infinite`,
     backgroundColor: colors.amber,

@@ -10,7 +10,6 @@ const withVanillaExtract = createVanillaExtractPlugin({
 
 const config: NextConfig = {
   allowedDevOrigins: ["192.168.0.227", "192.168.0.154"],
-  devIndicators: false,
   images: {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

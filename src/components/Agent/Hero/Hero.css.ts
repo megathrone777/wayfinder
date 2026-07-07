@@ -1,7 +1,7 @@
 import { style } from "@/theme";
 
 export const wrapperClass = style({
-  paddingBottom: 26,
+  padding: "24px 16px",
 });
 
 export const hintClass = style(({ colors, fonts }) => ({

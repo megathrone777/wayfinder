@@ -1,4 +1,4 @@
-import React, { useId, useState } from "react";
+import React, { useId } from "react";
 import NextForm from "next/form";
 
 import { Button, Icon } from "@/ui";
@@ -9,26 +9,29 @@ import {
   footerClass,
   hintClass,
   hintIconClass,
-  inputClass,
+  textareaClass,
 } from "./Form.css";
 
 import type { TProps } from "./Form.types";
 
 const Form: React.FC<TProps> = ({ isRunning, sendMessage }) => {
-  const inputId = useId();
-  const [inputValue, setInputValue] = useState<string>("");
+  const textareaId = useId();
 
-  const handleInputChange = ({ currentTarget }: React.SyntheticEvent<HTMLInputElement>): void => {
-    setInputValue(currentTarget.value);
+  const handleTextareaKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>): void => {
+    if ((event.key === "Enter" || event.key === "NumpadEnter") && !event.shiftKey) {
+      event.preventDefault();
+      event.currentTarget.form?.requestSubmit();
+    }
   };
 
   const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    const text: string = inputValue.trim();
+    const { currentTarget } = event;
+    const formData = new FormData(currentTarget);
+    const text: string = `${formData.get("message") || ""}`.trim();
 
     if (!text) return;
-
-    setInputValue("");
+    currentTarget.reset();
     await sendMessage({ text });
   };
 
@@ -39,15 +42,16 @@ const Form: React.FC<TProps> = ({ isRunning, sendMessage }) => {
         className={formClass}
         onSubmit={handleSubmit}
       >
-        <input
+        <textarea
           autoComplete="off"
-          className={inputClass}
+          autoFocus={false}
+          className={textareaClass}
           disabled={isRunning}
-          id={inputId}
-          onChange={handleInputChange}
+          id={textareaId}
+          name="message"
+          onKeyDown={handleTextareaKeyDown}
           placeholder="Describe your trip..."
           spellCheck="false"
-          value={inputValue}
         />
 
         <div className={footerClass}>

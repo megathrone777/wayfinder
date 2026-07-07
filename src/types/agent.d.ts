@@ -6,6 +6,7 @@ declare global {
   type TAgentTools = InferUITools<typeof tools>;
   type TAgentUIMessage = UIMessage<unknown, Record<string, never>, TAgentTools>;
   type TAgentAutonomyMode = "ask-always" | "ask-before-booking" | "auto";
+  type TraceStatus = "active" | "done" | "error" | "queued" | "waiting";
 
   type TAgentActivity =
     | "booking"
@@ -20,6 +21,20 @@ declare global {
   interface TAgentAutonomy {
     label: string;
     mode: TAgentAutonomyMode;
+  }
+
+  interface TraceApproval {
+    itinerarySummary: string;
+    toolCallId: string;
+    totalPrice: number;
+  }
+
+  interface TraceStep {
+    approval?: TraceApproval;
+    detail?: string;
+    id: string;
+    status: TraceStatus;
+    title: string;
   }
 }
 

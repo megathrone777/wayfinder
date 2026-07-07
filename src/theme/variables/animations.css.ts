@@ -1,6 +1,18 @@
 import { keyframes } from "@vanilla-extract/css";
 
 const animations = {
+  assemble: keyframes({
+    from: {
+      opacity: 0,
+      transform: "translateY(12px) scale(.985)",
+    },
+
+    to: {
+      opacity: 1,
+      transform: "none",
+    },
+  }),
+
   fadeIn: keyframes({
     from: {
       opacity: 0,

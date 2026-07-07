@@ -87,7 +87,7 @@ const config = defineConfig([
       "@eslint-react/naming-convention-id-name": "error",
       "@eslint-react/naming-convention-ref-name": "error",
       "@eslint-react/no-access-state-in-setstate": "error",
-      "@eslint-react/no-array-index-key": "error",
+      "@eslint-react/no-array-index-key": "off",
       "@eslint-react/no-class-component": "error",
       "@eslint-react/no-context-provider": "error",
       "@eslint-react/no-direct-mutation-state": "error",

@@ -37,7 +37,7 @@ globalStyle("button", {
   lineHeight: 1,
 });
 
-globalStyle("a:focus, button:focus", {
+globalStyle("a:focus, button:focus, input:focus, textarea:focus", {
   outline: "none",
 });
 

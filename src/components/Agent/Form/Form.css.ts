@@ -1,8 +1,16 @@
+import { calc } from "@vanilla-extract/css-utils";
+
 import { rgba, style } from "@/theme";
 
-export const wrapperClass = style({
-  paddingBottom: 20,
-});
+export const wrapperClass = style(({ devices, safeAreas }) => ({
+  padding: 16,
+
+  "@media": {
+    [devices.pointerCoarse]: {
+      paddingBottom: `${calc("16px").add(safeAreas.insetBottom)}`,
+    },
+  },
+}));
 
 export const formClass = style(({ colors }) => ({
   backgroundColor: colors.grayDarkest,
@@ -13,21 +21,19 @@ export const formClass = style(({ colors }) => ({
   padding: "2px 16px 16px",
 }));
 
-export const inputClass = style(({ colors }) => ({
+export const textareaClass = style(({ colors }) => ({
   backgroundColor: "transparent",
   border: "none",
   color: colors.white,
+  fieldSizing: "content",
   fontSize: 17,
-  outline: "none",
+  minHeight: "2lh",
   padding: "14px 2px",
+  resize: "none",
   width: "100%",
 
   "::placeholder": {
     color: colors.grayLighter,
-  },
-
-  ":focus": {
-    outline: "none",
   },
 }));
 

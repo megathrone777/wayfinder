@@ -1,10 +1,10 @@
 import React from "react";
 
+import { Logo } from "@/components";
 import { Container } from "@/ui";
 
 import { Activity } from "./Activity";
 import { Autonomy } from "./Autonomy";
-import { Logo } from "./Logo";
 import { Menu } from "./Menu";
 
 import { wrapperClass, layoutClass } from "./Header.css";

@@ -1,2 +1,2 @@
-export { activityLabel, deriveActivity, streamMessages } from "./ai";
+export { deriveActivity, deriveTrace, streamMessages } from "./ai";
 // export { sendBookingEmail } from "./emailSender";

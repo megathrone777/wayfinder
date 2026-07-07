@@ -1,14 +1,16 @@
 import { style } from "@/theme";
 
 export const wrapperClass = style({
-  display: "flex",
-  flexDirection: "column",
-  height: "100%",
+  flexGrow: 1,
+  maxWidth: "100%",
+  overflowY: "auto",
+  paddingInline: 16,
+  scrollbarWidth: "none",
+  width: "100%",
 });
 
 export const layoutClass = style({
   display: "flex",
   flexDirection: "column",
-  flexGrow: 1,
-  overflow: "hidden",
+  rowGap: 15,
 });

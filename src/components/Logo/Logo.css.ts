@@ -1,8 +1,8 @@
-import { rgba, style } from "@/theme";
+import { rgba, style, styleVariants } from "@/theme";
 
 export const wrapperClass = style({});
 
-export const linkClass = style({
+export const contentClass = style({
   alignItems: "center",
   columnGap: 13,
   display: "inline-flex",
@@ -18,8 +18,23 @@ export const layoutClass = style(({ colors }) => ({
   width: 19,
 }));
 
-export const labelClass = style(({ colors }) => ({
-  color: colors.white,
-  fontSize: 18,
-  fontWeight: 600,
-}));
+export const labelClass = styleVariants(
+  {
+    chat: {
+      fontSize: 15,
+    },
+
+    header: {
+      fontSize: 18,
+    },
+  },
+
+  (template, { colors }) => [
+    {
+      color: colors.white,
+      fontWeight: 600,
+    },
+
+    template,
+  ]
+);
