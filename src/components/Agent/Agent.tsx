@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import { useShallow } from "zustand/react/shallow";
 
 import { agent } from "@/services";
-import { useAgentStore } from "@/store";
+import { useAgentStore, useLayoutStore } from "@/store";
 
 import { Chat } from "./Chat";
 import { Chips } from "./Chips";
@@ -28,6 +28,7 @@ const Agent: React.FC = () => {
       setChatMessages,
     }))
   );
+  const layoutView = useLayoutStore(({ view }) => view);
 
   const { addToolOutput, messages, sendMessage, setMessages, status, stop } =
     useChat<TAgentUIMessage>({
@@ -45,8 +46,8 @@ const Agent: React.FC = () => {
       }),
     });
 
-  const tSteps = useTranslations("Steps");
-  const traceSteps: TraceStep[] = agent.getSteps(messages, status, tSteps);
+  const t = useTranslations("Steps");
+  const traceSteps: TraceStep[] = agent.getSteps(messages, status, t);
   const hasToolActivity: boolean = messages.some(
     ({ parts, role }) => role === "assistant" && parts.some(({ type }) => type.startsWith("tool-"))
   );
@@ -65,7 +66,7 @@ const Agent: React.FC = () => {
   }, [messages, status]);
 
   return (
-    <div className={wrapperClass}>
+    <div className={wrapperClass[layoutView]}>
       <Heading {...{ setMessages, stop }} />
 
       <div className={contentClass[showMessages || showTrace ? "default" : "scrollable"]}>

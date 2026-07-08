@@ -56,6 +56,11 @@
     "hint": "try"
   },
 
+  "Error": {
+    "button": "Go to main page",
+    "title": "Page not found"
+  },
+
   "Hero": {
     "description": "One sentence of intent. The agent parses it, searches, and assembles a plan you can inspect and approve — step by step.",
     "hint": "new session",

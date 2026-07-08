@@ -1,6 +1,5 @@
 import type { ChatStatus } from "ai";
 
-type TAgentPart = TAgentUIMessage["parts"][number];
 type ToolPartState = Extract<TAgentUIMessage["parts"][number], { state: string }>["state"];
 
 const isBookTripPart = (part: TAgentPart): part is Extract<TAgentPart, { type: "tool-bookTrip" }> =>

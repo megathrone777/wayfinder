@@ -1,12 +1,38 @@
-import { style } from "@/theme";
+import { calc } from "@vanilla-extract/css-utils";
 
-export const wrapperClass = style(({ devices }) => ({
-  display: "none",
+import { styleVariants } from "@/theme";
 
-  "@media": {
-    [devices.tablet]: {
+export const wrapperClass = styleVariants(
+  {
+    agent: {
+      display: "none",
+    },
+
+    output: {
       display: "block",
-      flexGrow: 1,
     },
   },
-}));
+
+  (view, { colors, devices, safeAreas }) => [
+    {
+      backgroundColor: colors.blackDarker,
+      flexDirection: "column",
+      height: "100%",
+      overflow: "hidden",
+      paddingBottom: 16,
+      width: "100%",
+
+      "@media": {
+        [devices.pointerCoarse]: {
+          paddingBottom: `${calc("16px").add(safeAreas.insetBottom)}`,
+        },
+
+        [devices.tablet]: {
+          flexGrow: 1,
+        },
+      },
+    },
+
+    view,
+  ]
+);

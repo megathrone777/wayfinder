@@ -5,9 +5,15 @@ import { useTranslations } from "next-intl";
 import { useAgentStore, useLayoutStore } from "@/store";
 import { Container } from "@/ui";
 
-import { wrapperClass, amountClass, buttonClass, buttonGlowClass, layoutClass } from "./View.css";
+import {
+  wrapperClass,
+  amountClass,
+  buttonClass,
+  buttonGlowClass,
+  layoutClass,
+} from "./ViewSwitcher.css";
 
-const View: React.FC = () => {
+const ViewSwitcher: React.FC = () => {
   const messages = useAgentStore(({ messages }) => messages);
   const { setView, view } = useLayoutStore();
   const t = useTranslations("Toolbar");
@@ -47,4 +53,4 @@ const View: React.FC = () => {
   );
 };
 
-export { View };
+export { ViewSwitcher };

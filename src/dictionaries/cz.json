@@ -56,6 +56,11 @@
     "hint": "zkuste"
   },
 
+  "Error": {
+    "button": "Přejít na hlavní stránku",
+    "title": "Stránka nebyla nalezena"
+  },
+
   "Hero": {
     "description": "Jedna věta záměru. Agent ji analyzuje, vyhledá a sestaví plán, který si můžete prohlédnout a schválit — krok za krokem.",
     "hint": "nová relace",

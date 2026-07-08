@@ -6,6 +6,7 @@ declare global {
   type TAgentTools = InferUITools<typeof tools>;
   type TAgentUIMessage = UIMessage<unknown, Record<string, never>, TAgentTools>;
   type TAgentAutonomyMode = "ask-always" | "ask-before-booking" | "auto";
+  type TAgentPart = TAgentUIMessage["parts"][number];
   type TraceStatus = "active" | "done" | "error" | "queued" | "waiting";
 
   type TAgentActivity =

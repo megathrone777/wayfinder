@@ -2,7 +2,6 @@ import type { ChatStatus } from "ai";
 import type { useTranslations } from "next-intl";
 
 type Translate = ReturnType<typeof useTranslations<"Steps">>;
-type TAgentPart = TAgentUIMessage["parts"][number];
 type ToolPart = Extract<TAgentPart, { state: string }>;
 type ToolType = ToolPart["type"];
 

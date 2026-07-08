@@ -12,6 +12,20 @@ const glow = keyframes({
   },
 });
 
+const scaleIn = keyframes({
+  "0%": {
+    transform: "scale(0)",
+  },
+
+  "60%": {
+    transform: "scale(1.25)",
+  },
+
+  "100%": {
+    transform: "scale(1)",
+  },
+});
+
 export const wrapperClass = style({
   borderTop: `1px solid ${rgba("255, 255, 255", 0.12)}`,
   paddingBlock: 8,
@@ -43,6 +57,7 @@ export const buttonClass = styleVariants(
       borderRadius: 9,
       columnGap: 8,
       display: "inline-flex",
+      flexBasis: "50%",
       flexGrow: 1,
       fontSize: 14,
       fontWeight: 600,
@@ -61,6 +76,7 @@ export const buttonGlowClass = style({
 
 export const amountClass = style(({ colors }) => ({
   alignItems: "center",
+  animation: `0.3s cubic-bezier(0.2, 0.8, 0.2, 1) 0s 1 normal both running ${scaleIn}`,
   backgroundColor: colors.blue,
   borderRadius: "100%",
   color: colors.black,

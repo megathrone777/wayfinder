@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 
 import { useAgentStore } from "@/store";
@@ -8,19 +7,17 @@ import { StayCard } from "./StayCard";
 
 import { wrapperClass } from "./Results.css";
 
-type TPart = TAgentUIMessage["parts"][number];
-
-const collectParts = (messages: TAgentUIMessage[]): TPart[] =>
+const collectParts = (messages: TAgentUIMessage[]): TAgentPart[] =>
   messages.filter(({ role }) => role === "assistant").flatMap(({ parts }) => parts);
 
-const findOutput = <T extends TPart["type"]>(
-  parts: TPart[],
+const findOutput = <T extends TAgentPart["type"]>(
+  parts: TAgentPart[],
   type: T
-): Extract<TPart, { state: "output-available"; type: T }> | undefined =>
+): Extract<TAgentPart, { state: "output-available"; type: T }> | undefined =>
   [...parts]
     .reverse()
     .find(
-      (part): part is Extract<TPart, { state: "output-available"; type: T }> =>
+      (part): part is Extract<TAgentPart, { state: "output-available"; type: T }> =>
         part.type === type && "state" in part && part.state === "output-available"
     );
 
