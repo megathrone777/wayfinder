@@ -1,4 +1,10 @@
 declare global {
+  interface TItineraryDay {
+    day: number;
+    stops: string[];
+    title: string;
+  }
+
   interface THotel {
     amenities: string[];
     breakfastIncluded: boolean;

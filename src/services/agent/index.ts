@@ -1,7 +1,8 @@
-import { getActivity, getSteps, streamMessages } from "./utils";
+import { getActivity, getOutput, getSteps, streamMessages } from "./utils";
 
 const agent = {
   getActivity,
+  getOutput,
   getSteps,
   streamMessages,
 };

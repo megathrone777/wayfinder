@@ -1,24 +1,40 @@
-import { style } from "@/theme";
+import { calc } from "@vanilla-extract/css-utils";
 
-// Placeholder hooks — styling is left to you.
-export const wrapperClass = style({});
+import { styleVariants } from "@/theme";
 
-export const cardClass = style({});
+export const wrapperClass = styleVariants(
+  {
+    agent: {
+      display: "none",
+    },
 
-export const cardHeadingClass = style({});
+    output: {
+      display: "flex",
+    },
+  },
 
-export const priceClass = style({});
+  (view, { colors, devices, safeAreas }) => [
+    {
+      backgroundColor: colors.blackDarker,
+      flexDirection: "column",
+      height: "100%",
+      overflowY: "auto",
+      padding: 16,
+      rowGap: 18,
+      scrollbarWidth: "none",
+      width: "100%",
 
-export const rowClass = style({});
+      "@media": {
+        [devices.pointerCoarse]: {
+          paddingBottom: `${calc("16px").add(safeAreas.insetBottom)}`,
+        },
 
-export const legClass = style({});
+        [devices.tablet]: {
+          flexGrow: 1,
+        },
+      },
+    },
 
-export const mutedClass = style({});
-
-export const thumbClass = style({});
-
-export const tagsClass = style({});
-
-export const tagClass = style({});
-
-export const ratingClass = style({});
+    view,
+  ]
+);

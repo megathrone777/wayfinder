@@ -5,7 +5,7 @@ const searchHotels = tool({
   description: "Search hotels in a city within a budget band",
 
   execute: async ({ city }) => {
-    const response = await fetch(`${process.env.PUBLIC_URL}/data/hotels.json`);
+    const response = await fetch(`${process.env.PUBLIC_URL}/mock/hotels.json`);
     const hotels = (await response.json()) as THotel[];
 
     return hotels.map<THotel>((hotel: THotel): THotel => ({ ...hotel, city }));

@@ -36,6 +36,7 @@ const getSteps = (messages: TAgentUIMessage[], status: ChatStatus, t: Translate)
 
   const flights = findToolPart(parts, "tool-searchFlights");
   const hotels = findToolPart(parts, "tool-searchHotels");
+  const itinerary = findToolPart(parts, "tool-assembleItinerary");
   const booking = findToolPart(parts, "tool-bookTrip");
 
   const flightsStatus = toStatus(flights);
@@ -44,7 +45,9 @@ const getSteps = (messages: TAgentUIMessage[], status: ChatStatus, t: Translate)
 
   let itineraryStatus: TraceStatus = "queued";
 
-  if (booking) {
+  if (itinerary) {
+    itineraryStatus = toStatus(itinerary);
+  } else if (booking) {
     itineraryStatus = "done";
   } else if (searchesDone) {
     itineraryStatus = isRunning ? "active" : "done";
@@ -88,7 +91,7 @@ const getSteps = (messages: TAgentUIMessage[], status: ChatStatus, t: Translate)
       title: t("title.search-stays"),
     },
     {
-      detail: searchesDone ? t("detail.assemble-itinerary") : undefined,
+      detail: itinerary || searchesDone ? t("detail.assemble-itinerary") : undefined,
       id: "assemble-itinerary",
       status: itineraryStatus,
       title: t("title.assemble-itinerary"),

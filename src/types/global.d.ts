@@ -25,6 +25,8 @@ declare global {
       name: string;
       region: string;
     };
+    cityFrom: string;
+    cityTo: string;
     price: {
       currency: string;
       total: number;

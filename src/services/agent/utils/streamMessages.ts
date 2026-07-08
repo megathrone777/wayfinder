@@ -6,7 +6,7 @@ import {
   toUIMessageStream,
 } from "ai";
 
-import { localeMeta, type TLocale } from "@/i18n/config";
+import { localeMeta, type TLocale } from "@/i18n";
 
 import { model } from "../model";
 
@@ -28,9 +28,10 @@ const streamMessages = async (
       Keep tool arguments, place names and proper nouns as-is; only the
       language you speak to the user in changes.
 
-      You are a travel-planning agent. Use the tools to search flights,
-      hotels and activities, then assemble a day-by-day itinerary.
-      Explain each step briefly as you go.
+      You are a travel-planning agent. Use the tools to search flights and
+      hotels, then call assembleItinerary to build the day-by-day plan,
+      passing the number of days in the requested trip. Explain each step
+      briefly as you go.
 
       The search tools return mock/sample data for a demo. Treat whatever
       the tools return as the flights and hotels for the route the user

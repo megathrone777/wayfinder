@@ -1,23 +1,14 @@
-"use client";
 import React from "react";
 
-import { useLayoutStore } from "@/store";
-import { Container } from "@/ui";
-
 import { Results } from "./Results";
+import { RouteCanvas } from "./RouteCanvas";
+import { Trip } from "./Trip";
 
-import { wrapperClass } from "./Output.css";
-
-const Output: React.FC = () => {
-  const layoutView = useLayoutStore(({ view }) => view);
-
-  return (
-    <div className={wrapperClass[layoutView]}>
-      <Container>
-        <Results />
-      </Container>
-    </div>
-  );
-};
+const Output: React.FC = () => (
+  <Results>
+    <RouteCanvas />
+    <Trip />
+  </Results>
+);
 
 export { Output };

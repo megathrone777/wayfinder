@@ -1,0 +1,6 @@
+[
+  { "label": "Lisbon", "x": 300, "y": 148 },
+  { "label": "Belém", "x": 212, "y": 190 },
+  { "label": "Cascais", "labelDx": -56, "labelDy": 20, "x": 112, "y": 202 },
+  { "label": "Sintra", "x": 152, "y": 86 }
+]

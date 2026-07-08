@@ -1,0 +1,12 @@
+{
+  "costs": { "flights": 842, "stay": 1140, "total": 1982 },
+  "days": [
+    { "code": "D1", "label": "Alfama" },
+    { "code": "D2", "label": "Belém" },
+    { "code": "D3", "label": "Chiado" },
+    { "code": "D4", "label": "Sintra" },
+    { "code": "D5", "label": "Cascais" },
+    { "code": "D6", "label": "Depart" }
+  ],
+  "reference": "WF-LIS-8842"
+}

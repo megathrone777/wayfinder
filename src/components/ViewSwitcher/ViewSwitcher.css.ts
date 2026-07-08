@@ -4,11 +4,11 @@ import { rgba, style, styleVariants } from "@/theme";
 
 const glow = keyframes({
   "0%, 100%": {
-    boxShadow: `inset 0 0 0 1px ${rgba("79, 140, 255", 0)}`,
+    boxShadow: `inset 0 0 0 2px ${rgba("79, 140, 255", 0)}`,
   },
 
   "50%": {
-    boxShadow: `inset 0 0 0 1px ${rgba("79, 140, 255", 0.55)}`,
+    boxShadow: `inset 0 0 0 2px ${rgba("79, 140, 255", 0.55)}`,
   },
 });
 

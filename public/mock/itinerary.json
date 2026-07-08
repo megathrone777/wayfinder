@@ -1,0 +1,102 @@
+[
+  {
+    "id": "day_alfama_fado",
+    "title": "Alfama & Fado",
+    "stops": ["Sé Cathedral", "Miradouro de Santa Luzia", "Fado dinner"]
+  },
+  {
+    "id": "day_belem_icons",
+    "title": "Belém icons",
+    "stops": ["Jerónimos", "Torre de Belém", "Pastéis de Belém"]
+  },
+  {
+    "id": "day_chiado_bairro_alto",
+    "title": "Chiado & Bairro Alto",
+    "stops": ["LX Factory", "Time Out Market", "design shops"]
+  },
+  {
+    "id": "day_sintra_palaces",
+    "title": "Sintra day trip",
+    "stops": ["Pena Palace", "Quinta da Regaleira", "Moorish Castle"]
+  },
+  {
+    "id": "day_cascais_coast",
+    "title": "Cascais coast",
+    "stops": ["Boca do Inferno", "Praia da Rainha", "seafood lunch"]
+  },
+  {
+    "id": "day_modern_art_river",
+    "title": "Modern art & river",
+    "stops": ["MAAT", "Cais do Sodré", "sunset cruise"]
+  },
+  {
+    "id": "day_mouraria_tiles",
+    "title": "Mouraria & tiles",
+    "stops": ["National Tile Museum", "Mouraria walk", "ginjinha stop"]
+  },
+  {
+    "id": "day_principe_real",
+    "title": "Príncipe Real",
+    "stops": ["Botanical Garden", "concept stores", "rooftop drinks"]
+  },
+  {
+    "id": "day_estrela_lapa",
+    "title": "Estrela & Lapa",
+    "stops": ["Basílica da Estrela", "Estrela Garden", "embassy quarter"]
+  },
+  {
+    "id": "day_parque_das_nacoes",
+    "title": "Parque das Nações",
+    "stops": ["Oceanário", "cable car", "Vasco da Gama bridge"]
+  },
+  {
+    "id": "day_marvila_tasting",
+    "title": "Marvila tasting",
+    "stops": ["craft breweries", "riverside warehouses", "wine cellar"]
+  },
+  {
+    "id": "day_sintra_hills",
+    "title": "Sintra hills & coast",
+    "stops": ["Cabo da Roca", "Convento dos Capuchos", "Azenhas do Mar"]
+  },
+  {
+    "id": "day_obidos_escape",
+    "title": "Óbidos escape",
+    "stops": ["medieval walls", "Ginja de Óbidos", "village lanes"]
+  },
+  {
+    "id": "day_setubal_dolphins",
+    "title": "Setúbal & dolphins",
+    "stops": ["Arrábida beach", "dolphin watch", "fresh fish lunch"]
+  },
+  {
+    "id": "day_campo_de_ourique",
+    "title": "Campo de Ourique",
+    "stops": ["market brunch", "Prazeres cemetery", "tram 28"]
+  },
+  {
+    "id": "day_almada_viewpoints",
+    "title": "Almada viewpoints",
+    "stops": ["Cristo Rei", "ferry ride", "Costa da Caparica"]
+  },
+  {
+    "id": "day_gulbenkian_culture",
+    "title": "Gulbenkian culture",
+    "stops": ["Gulbenkian Museum", "gardens", "classical concert"]
+  },
+  {
+    "id": "day_alcantara_docks",
+    "title": "Alcântara docks",
+    "stops": ["Docas marina", "Museu do Oriente", "riverside dinner"]
+  },
+  {
+    "id": "day_graca_miradouros",
+    "title": "Graça miradouros",
+    "stops": ["Senhora do Monte", "São Vicente", "panorama sunset"]
+  },
+  {
+    "id": "day_slow_departure",
+    "title": "Slow morning & fly out",
+    "stops": ["Feira da Ladra", "Miradouro da Graça", "LIS departure"]
+  }
+]
