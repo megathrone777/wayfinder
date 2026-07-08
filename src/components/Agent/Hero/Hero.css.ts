@@ -1,13 +1,12 @@
 import { style } from "@/theme";
 
 export const wrapperClass = style({
-  padding: "24px 16px",
+  padding: "24px 16px 8px",
 });
 
 export const hintClass = style(({ colors, fonts }) => ({
   color: colors.blue,
   font: `12px ${fonts.jetBrainsMono}`,
-  letterSpacing: 1,
   marginBottom: 16,
   textTransform: "uppercase",
 }));

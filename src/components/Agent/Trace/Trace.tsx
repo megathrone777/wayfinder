@@ -1,31 +1,16 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 
 import { Approval } from "./Approval";
+import { Step } from "./Step";
 
-import {
-  wrapperClass,
-  bodyClass,
-  detailClass,
-  headingClass,
-  itemClass,
-  listClass,
-  markerClass,
-  progressClass,
-  statusClass,
-  titleClass,
-} from "./Trace.css";
+import { wrapperClass, headingClass, listClass } from "./Trace.css";
 
 import type { TProps } from "./Trace.types";
 
-const statusLabel: Record<TraceStatus, string> = {
-  active: "Running",
-  done: "Done",
-  error: "Failed",
-  queued: "Queued",
-  waiting: "Waiting",
-};
+const Trace: React.FC<TProps> = ({ addToolOutput, traceSteps }) => {
+  const t = useTranslations("Trace");
 
-const Trace: React.FC<TProps> = ({ addToolOutput, steps }) => {
   const handleApprove = (toolCallId: string): void => {
     void addToolOutput({
       output: {
@@ -48,36 +33,29 @@ const Trace: React.FC<TProps> = ({ addToolOutput, steps }) => {
 
   return (
     <div className={wrapperClass}>
-      <p className={headingClass}>Reasoning trace</p>
+      <p className={headingClass}>{t("heading")}</p>
 
-      <ol className={listClass}>
-        {steps.map<React.ReactElement>(({ approval, detail, id, status, title }: TraceStep) => (
-          <li
-            className={itemClass}
-            data-status={status}
-            key={id}
-          >
-            <span className={markerClass} />
-
-            <div className={bodyClass}>
-              <p className={titleClass}>{title}</p>
-              {detail && <p className={detailClass}>{detail}</p>}
-
+      <div className={listClass}>
+        {traceSteps.map<React.ReactElement>(
+          ({ approval, detail, id, status, title }: TraceStep, index) => (
+            <Step
+              isLast={index === traceSteps.length - 1}
+              isPast={status === "done"}
+              key={id}
+              {...{ detail, status, title }}
+            >
               {approval && (
                 <Approval
-                  {...{ approval }}
                   onApprove={handleApprove}
                   onReject={handleReject}
-                  totalPrice={123}
+                  toolCallId={approval.toolCallId}
+                  totalPrice={approval.totalPrice}
                 />
               )}
-            </div>
-
-            {status === "active" && <div className={progressClass} />}
-            <span className={statusClass}>{statusLabel[status]}</span>
-          </li>
-        ))}
-      </ol>
+            </Step>
+          )
+        )}
+      </div>
     </div>
   );
 };

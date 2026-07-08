@@ -22,6 +22,11 @@ export const buttonClass = style(({ colors }) => ({
   lineHeight: "normal",
   padding: "9px 15px",
   textAlign: "left",
+
+  ":hover": {
+    backgroundColor: rgba(colors.blackDarkest, 0.7),
+    color: colors.white,
+  },
 }));
 
 export const hintClass = style(({ colors, fonts }) => ({

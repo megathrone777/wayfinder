@@ -1,9 +1,6 @@
 import { rgba, style, styleVariants } from "@/theme";
 
 export const wrapperClass = style({
-  alignItems: "center",
-  columnGap: 12,
-  display: "flex",
   position: "relative",
 });
 
@@ -35,7 +32,7 @@ export const layoutClass = styleVariants(
       position: "absolute",
       right: 0,
       rowGap: 16,
-      top: 62,
+      top: 63,
       transitionDuration: ".35s",
       transitionProperty: "opacity, transform, visibility",
       transitionTimingFunction: easing,

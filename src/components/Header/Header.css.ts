@@ -13,3 +13,9 @@ export const layoutClass = style({
   height: "100%",
   justifyContent: "space-between",
 });
+
+export const contentClass = style({
+  alignItems: "center",
+  columnGap: 20,
+  display: "flex",
+});

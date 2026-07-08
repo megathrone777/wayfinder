@@ -1,16 +1,8 @@
-import { calc } from "@vanilla-extract/css-utils";
-
 import { rgba, style } from "@/theme";
 
-export const wrapperClass = style(({ devices, safeAreas }) => ({
-  padding: 16,
-
-  "@media": {
-    [devices.pointerCoarse]: {
-      paddingBottom: `${calc("16px").add(safeAreas.insetBottom)}`,
-    },
-  },
-}));
+export const wrapperClass = style({
+  paddingInline: 16,
+});
 
 export const formClass = style(({ colors }) => ({
   backgroundColor: colors.grayDarkest,
@@ -27,6 +19,7 @@ export const textareaClass = style(({ colors }) => ({
   color: colors.white,
   fieldSizing: "content",
   fontSize: 17,
+  letterSpacing: 1,
   minHeight: "2lh",
   padding: "14px 2px",
   resize: "none",
@@ -34,11 +27,12 @@ export const textareaClass = style(({ colors }) => ({
 
   "::placeholder": {
     color: colors.grayLighter,
+    letterSpacing: 1,
   },
 }));
 
 export const footerClass = style({
-  alignItems: "center",
+  alignItems: "end",
   display: "flex",
   justifyContent: "space-between",
 });

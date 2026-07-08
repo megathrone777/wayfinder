@@ -1,6 +1,6 @@
 const fonts = {
   jetBrainsMono: "var(--font-jetbrains-mono)",
-  spaceGrotesk: "var(--font-space-grotesk)",
+  onest: "var(--font-onest)",
 };
 
 export { fonts };

@@ -1,0 +1,96 @@
+{
+  "Activity": {
+    "booking": "Booking...",
+    "building-itinerary": "Building itinerary...",
+    "idle": "Idle",
+    "searching-flights": "Searching flights...",
+    "searching-stays": "Searching stays...",
+    "trip-confirmed": "Trip confirmed",
+    "trip-rejected": "Booking declined",
+    "waiting": "Waiting for you"
+  },
+
+  "Approval": {
+    "buttonApprove": "Approve",
+    "buttonReject": "Reject",
+    "text": "Ready to book flights + stay for ${totalPrice}. This action spends money — confirm to proceed.",
+    "title": "Approval needed"
+  },
+
+  "Autonomy": {
+    "ask-always": "Ask always",
+    "ask-before-booking": "Ask before booking",
+    "auto": "Full auto",
+    "title": "Autonomy"
+  },
+
+  "Chat": {
+    "hint": "to plan",
+    "placeholder": "Describe your trip...",
+    "planTrip": "Plan trip"
+  },
+
+  "Chips": {
+    "chips": [
+      {
+        "label": "From Prague to Vienna, in 10 days, 2 persons, any budget",
+        "prompt": "Plan a 10-day trip from Prague to Vienna for 2 people, any budget."
+      },
+      {
+        "label": "Small 5 days vacation in Budapest",
+        "prompt": "Plan a 5-day trip from Berlin to Budapest for 1 person, mid-range budget."
+      },
+      {
+        "label": "Long weekend in Kyoto — temples & a ryokan",
+        "prompt": "Plan a 4-day trip from San Francisco to Kyoto for 2 people, focused on temples with a ryokan stay, mid-range budget."
+      },
+      {
+        "label": "10 days Patagonia, hiking & lodges",
+        "prompt": "Plan a 10-day trip from London to El Calafate, Patagonia for 2 people, hiking and lodges, higher budget."
+      },
+      {
+        "label": "6 days Lisbon & Sintra, food + design",
+        "prompt": "Plan a 6-day trip from New York to Lisbon and Sintra for 2 people, food and design focus, mid-range budget."
+      }
+    ],
+    "hint": "try"
+  },
+
+  "Hero": {
+    "description": "One sentence of intent. The agent parses it, searches, and assembles a plan you can inspect and approve — step by step.",
+    "hint": "new session",
+    "title": "Describe your trip."
+  },
+
+  "Steps": {
+    "detail": {
+      "assemble-itinerary": "Balancing pace + travel time",
+      "confirm": "Booking for ${price}",
+      "finalize-locked": "Fares locked, room reserved",
+      "finalize-pending": "Lock fares, reserve room"
+    },
+    "title": {
+      "assemble-itinerary": "Assemble itinerary",
+      "confirm": "Confirm with traveler",
+      "finalize": "Finalize & book",
+      "parse-intent": "Parse intent",
+      "search-flights": "Search flights",
+      "search-stays": "Search stays"
+    }
+  },
+
+  "Trace": {
+    "active": "Running",
+    "done": "Done",
+    "error": "Failed",
+    "heading": "Reasoning trace",
+    "queued": "Queued",
+    "waiting": "Waiting"
+  },
+
+  "Toolbar": {
+    "agentLane": "Agent lane",
+    "reset": "Reset",
+    "results": "Results"
+  }
+}

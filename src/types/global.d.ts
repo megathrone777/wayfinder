@@ -35,6 +35,8 @@ declare global {
       duration: string;
     };
   }
+
+  type TLayoutView = "agent" | "output";
 }
 
 export {};

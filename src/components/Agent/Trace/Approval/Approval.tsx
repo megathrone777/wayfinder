@@ -1,10 +1,12 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 
-import { Button, Icon } from "@/ui";
+import { Icon } from "@/ui";
 
 import {
   wrapperClass,
-  buttonClass,
+  buttonApproveClass,
+  buttonRejectClass,
   contentClass,
   footerClass,
   headerClass,
@@ -15,7 +17,9 @@ import {
 
 import type { TProps } from "./Approval.types";
 
-const Approval: React.FC<TProps> = ({ approval, onApprove, onReject, totalPrice }) => {
+const Approval: React.FC<TProps> = ({ onApprove, onReject, toolCallId, totalPrice }) => {
+  const t = useTranslations("Approval");
+
   const handleApproveClick = ({ currentTarget }: React.SyntheticEvent<HTMLButtonElement>): void => {
     onApprove(currentTarget.value);
   };
@@ -34,33 +38,29 @@ const Approval: React.FC<TProps> = ({ approval, onApprove, onReject, totalPrice 
           />
         </div>
 
-        <h6 className={titleClass}>Approval needed</h6>
+        <h6 className={titleClass}>{t("title")}</h6>
       </div>
 
-      <div className={contentClass}>
-        Ready to book flights + stay for ${totalPrice}. This action spends money — confirm to
-        proceed.
-      </div>
+      <div className={contentClass}>{t("text", { totalPrice })}</div>
 
       <div className={footerClass}>
         <button
-          className={buttonClass}
+          className={buttonApproveClass}
           onClick={handleApproveClick}
           type="button"
-          value={approval?.toolCallId}
+          value={toolCallId}
         >
-          Approve &amp; book
+          {t("buttonApprove")}
         </button>
 
-        <Button
+        <button
+          className={buttonRejectClass}
           onClick={handleRejectClick}
-          size="normal"
-          template="tertiary"
           type="button"
-          value={approval?.toolCallId}
+          value={toolCallId}
         >
-          Reject
-        </Button>
+          {t("buttonReject")}
+        </button>
       </div>
     </div>
   );

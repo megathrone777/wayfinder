@@ -1,12 +1,12 @@
 import type { ChatStatus } from "ai";
 
 type TAgentPart = TAgentUIMessage["parts"][number];
-type TToolPartState = Extract<TAgentUIMessage["parts"][number], { state: string }>["state"];
+type ToolPartState = Extract<TAgentUIMessage["parts"][number], { state: string }>["state"];
 
 const isBookTripPart = (part: TAgentPart): part is Extract<TAgentPart, { type: "tool-bookTrip" }> =>
   part.type === "tool-bookTrip";
 
-const isRunning = (state: TToolPartState): boolean =>
+const isRunning = (state: ToolPartState): boolean =>
   state === "input-streaming" || state === "input-available";
 
 const isSearchPart = (
@@ -19,7 +19,7 @@ const isRunningSearchPart = (
 ): part is Extract<TAgentPart, { type: "tool-searchFlights" | "tool-searchHotels" }> =>
   isSearchPart(part) && isRunning(part.state);
 
-const deriveActivity = (messages: TAgentUIMessage[], status: ChatStatus): TAgentActivity => {
+const getActivity = (messages: TAgentUIMessage[], status: ChatStatus): TAgentActivity => {
   const busy = status === "submitted" || status === "streaming";
   const assistant = [...messages].reverse().find(({ role }) => role === "assistant");
   const parts = assistant?.parts ?? [];
@@ -50,4 +50,4 @@ const deriveActivity = (messages: TAgentUIMessage[], status: ChatStatus): TAgent
   return "idle";
 };
 
-export { deriveActivity };
+export { getActivity };

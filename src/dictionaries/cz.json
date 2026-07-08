@@ -1,0 +1,96 @@
+{
+  "Activity": {
+    "booking": "Rezervuji...",
+    "building-itinerary": "Sestavuji itinerář...",
+    "idle": "Nečinné",
+    "searching-flights": "Hledám lety...",
+    "searching-stays": "Hledám ubytování...",
+    "trip-confirmed": "Cesta potvrzena",
+    "trip-rejected": "Rezervace zamítnuta",
+    "waiting": "Čekám na vás"
+  },
+
+  "Approval": {
+    "buttonApprove": "Schválit",
+    "buttonReject": "Zamítnout",
+    "text": "Připraveno rezervovat lety + ubytování za ${totalPrice}. Tato akce utrácí peníze — pro pokračování potvrďte.",
+    "title": "Vyžaduje se schválení"
+  },
+
+  "Autonomy": {
+    "ask-always": "Vždy se ptát",
+    "ask-before-booking": "Zeptat se před rezervací",
+    "auto": "Plně automaticky",
+    "title": "Autonomie"
+  },
+
+  "Chat": {
+    "hint": "pro plánování",
+    "placeholder": "Popište svou cestu...",
+    "planTrip": "Naplánovat"
+  },
+
+  "Chips": {
+    "chips": [
+      {
+        "label": "Z Prahy do Vídně, za 10 dní, 2 osoby, jakýkoli rozpočet",
+        "prompt": "Naplánuj 10denní cestu z Prahy do Vídně pro 2 osoby, jakýkoli rozpočet."
+      },
+      {
+        "label": "Krátká 5denní dovolená v Budapešti",
+        "prompt": "Naplánuj 5denní cestu z Berlína do Budapešti pro 1 osobu, střední rozpočet."
+      },
+      {
+        "label": "Prodloužený víkend v Kjótu — chrámy a rjokan",
+        "prompt": "Naplánuj 4denní cestu ze San Francisca do Kjóta pro 2 osoby, zaměřenou na chrámy s pobytem v rjokanu, střední rozpočet."
+      },
+      {
+        "label": "10 dní v Patagonii, treky a lodže",
+        "prompt": "Naplánuj 10denní cestu z Londýna do El Calafate v Patagonii pro 2 osoby, treky a lodže, vyšší rozpočet."
+      },
+      {
+        "label": "6 dní Lisabon a Sintra, jídlo + design",
+        "prompt": "Naplánuj 6denní cestu z New Yorku do Lisabonu a Sintry pro 2 osoby, zaměřenou na jídlo a design, střední rozpočet."
+      }
+    ],
+    "hint": "zkuste"
+  },
+
+  "Hero": {
+    "description": "Jedna věta záměru. Agent ji analyzuje, vyhledá a sestaví plán, který si můžete prohlédnout a schválit — krok za krokem.",
+    "hint": "nová relace",
+    "title": "Popište svou cestu."
+  },
+
+  "Steps": {
+    "detail": {
+      "assemble-itinerary": "Vyvažuji tempo + čas na cestách",
+      "confirm": "Rezervace za ${price}",
+      "finalize-locked": "Ceny zajištěny, pokoj rezervován",
+      "finalize-pending": "Zajistit ceny, rezervovat pokoj"
+    },
+    "title": {
+      "assemble-itinerary": "Sestavit itinerář",
+      "confirm": "Potvrdit s cestujícím",
+      "finalize": "Dokončit & rezervovat",
+      "parse-intent": "Analyzovat záměr",
+      "search-flights": "Hledat lety",
+      "search-stays": "Hledat ubytování"
+    }
+  },
+
+  "Trace": {
+    "active": "Probíhá",
+    "done": "Hotovo",
+    "error": "Selhalo",
+    "heading": "Záznam uvažování",
+    "queued": "Ve frontě",
+    "waiting": "Čeká"
+  },
+
+  "Toolbar": {
+    "agentLane": "Dráha agenta",
+    "reset": "Resetovat",
+    "results": "Výsledky"
+  }
+}

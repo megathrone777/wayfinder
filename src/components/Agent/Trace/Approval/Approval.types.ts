@@ -1,4 +1,4 @@
-export interface TProps extends Pick<TBooking, "totalPrice">, Pick<TraceStep, "approval"> {
+export interface TProps extends Required<Pick<TraceApproval, "toolCallId" | "totalPrice">> {
   onApprove: (toolCallId: string) => void;
   onReject: (toolCallId: string) => void;
 }

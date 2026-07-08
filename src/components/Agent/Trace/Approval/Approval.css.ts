@@ -11,13 +11,13 @@ const pulse = keyframes({
 export const wrapperClass = style(({ animations, colors }) => ({
   animation: `${animations.assemble} .4s ease both`,
   backgroundColor: rgba(colors.amber, 0.08),
-  border: `1px solid ${rgba(colors.amber, 0.4)}`,
   borderLeft: `4px solid ${colors.amber}`,
   borderRadius: 13,
   boxShadow: `
     0 0 0 1px ${rgba(colors.amber, 0.14)},
     0 8px 30px ${rgba(colors.amber, 0.1)}
   `,
+  marginTop: 16,
   opacity: 0,
   padding: 16,
   transform: "translateY(12px) scale(.985)",
@@ -65,13 +65,24 @@ export const footerClass = style({
   display: "flex",
 });
 
-export const buttonClass = style(({ colors }) => ({
+export const buttonApproveClass = style(({ colors }) => ({
   backgroundColor: colors.amber,
   border: "none",
   borderRadius: 9,
   color: colors.black,
   fontSize: 15,
   fontWeight: 600,
-  height: 40,
+  height: 41,
+  paddingInline: 11,
+}));
+
+export const buttonRejectClass = style(({ colors }) => ({
+  backgroundColor: "transparent",
+  border: `1px solid ${rgba("255, 255, 255", 0.18)}`,
+  borderRadius: 9,
+  color: colors.whiteDarker,
+  fontSize: 15,
+  fontWeight: 600,
+  height: 41,
   paddingInline: 11,
 }));

@@ -26,7 +26,8 @@ globalStyle("html, body", {
 globalStyle("body", ({ colors, fonts }) => ({
   backgroundColor: colors.black,
   color: colors.white,
-  font: `16px ${fonts.spaceGrotesk}`,
+  font: `16px ${fonts.onest}`,
+  letterSpacing: 1,
   minWidth: 340,
   MozOsxFontSmoothing: "grayscale",
   WebkitFontSmoothing: "antialiased",
@@ -34,7 +35,7 @@ globalStyle("body", ({ colors, fonts }) => ({
 
 globalStyle("button", {
   cursor: "pointer",
-  lineHeight: 1,
+  letterSpacing: 1,
 });
 
 globalStyle("a:focus, button:focus, input:focus, textarea:focus", {

@@ -1,5 +1,27 @@
 import localFont from "next/font/local";
 
+const fontOnest = localFont({
+  display: "block",
+  src: [
+    {
+      path: "./Onest-Regular.woff2",
+      style: "normal",
+      weight: "400",
+    },
+    {
+      path: "./Onest-Medium.woff2",
+      style: "normal",
+      weight: "500",
+    },
+    {
+      path: "./Onest-SemiBold.woff2",
+      style: "normal",
+      weight: "600",
+    },
+  ],
+  variable: "--font-onest",
+});
+
 const fontJetBrainsMono = localFont({
   display: "block",
   src: [
@@ -12,26 +34,4 @@ const fontJetBrainsMono = localFont({
   variable: "--font-jetbrains-mono",
 });
 
-const fontSpaceGrotesk = localFont({
-  display: "block",
-  src: [
-    {
-      path: "./SpaceGrotesk-Regular.woff2",
-      style: "normal",
-      weight: "400",
-    },
-    {
-      path: "./SpaceGrotesk-Medium.woff2",
-      style: "normal",
-      weight: "500",
-    },
-    {
-      path: "./SpaceGrotesk-SemiBold.woff2",
-      style: "normal",
-      weight: "600",
-    },
-  ],
-  variable: "--font-space-grotesk",
-});
-
-export { fontJetBrainsMono, fontSpaceGrotesk };
+export { fontJetBrainsMono, fontOnest };

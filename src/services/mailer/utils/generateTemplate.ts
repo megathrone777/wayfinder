@@ -1,15 +1,15 @@
-import fs from "fs";
+import { readFile } from "fs/promises";
 import path from "path";
 
 import pug from "pug";
 
-import type { TGenerateTemplateInput } from "./emailSender.types";
+import type { TGenerateTemplateInput } from "./types";
 
-const basedir = path.join(process.cwd(), "src", "services", "emailSender", "template");
+const basedir = path.join(process.cwd(), "src", "services", "mailer", "template");
 const filename = path.join(basedir, "template.pug");
 
 const generateTemplate = async ({ booking, company }: TGenerateTemplateInput): Promise<string> => {
-  const source = await fs.promises.readFile(basedir, "utf8");
+  const source = await readFile(basedir, "utf8");
   const compile = pug.compile(source, {
     basedir,
     filename,

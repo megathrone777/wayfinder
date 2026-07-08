@@ -5,23 +5,36 @@ import { Container } from "@/ui";
 
 import { Activity } from "./Activity";
 import { Autonomy } from "./Autonomy";
+import { Language } from "./Language";
 import { Menu } from "./Menu";
+import { Toolbar } from "./Toolbar";
+import { View } from "./View";
 
-import { wrapperClass, layoutClass } from "./Header.css";
+import { wrapperClass, contentClass, layoutClass } from "./Header.css";
 
 const Header: React.FC = () => (
-  <div className={wrapperClass}>
-    <Container>
-      <div className={layoutClass}>
-        <Logo />
+  <>
+    <div className={wrapperClass}>
+      <Container>
+        <div className={layoutClass}>
+          <Logo />
 
-        <Menu>
-          <Activity />
-          <Autonomy />
-        </Menu>
-      </div>
-    </Container>
-  </div>
+          <div className={contentClass}>
+            <Toolbar>
+              <Language />
+            </Toolbar>
+
+            <Menu>
+              <Activity />
+              <Autonomy />
+            </Menu>
+          </div>
+        </div>
+      </Container>
+    </div>
+
+    <View />
+  </>
 );
 
 export { Header };

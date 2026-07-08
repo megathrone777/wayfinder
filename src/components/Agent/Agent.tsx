@@ -1,10 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
 import { useChat } from "@ai-sdk/react";
+import useVibration, { VibrationPatterns } from "@luxonauta/use-vibration";
 import { DefaultChatTransport, lastAssistantMessageIsCompleteWithToolCalls } from "ai";
+import { useTranslations } from "next-intl";
 import { useShallow } from "zustand/react/shallow";
 
-import { deriveActivity, deriveTrace } from "@/services";
+import { agent } from "@/services";
 import { useAgentStore } from "@/store";
 
 import { Chat } from "./Chat";
@@ -18,6 +20,7 @@ import { Trace } from "./Trace";
 import { wrapperClass, contentClass } from "./Agent.css";
 
 const Agent: React.FC = () => {
+  const [{ isSupported }, { vibrate }] = useVibration();
   const { autonomyMode, setActivity, setChatMessages } = useAgentStore(
     useShallow(({ autonomyMode, setActivity, setChatMessages }) => ({
       autonomyMode,
@@ -25,15 +28,25 @@ const Agent: React.FC = () => {
       setChatMessages,
     }))
   );
+
   const { addToolOutput, messages, sendMessage, setMessages, status, stop } =
     useChat<TAgentUIMessage>({
+      onFinish: ({ isAbort, isDisconnect, isError, message }): void => {
+        if (!isSupported) return;
+        if (isAbort || isDisconnect || isError) return;
+        if (message.parts.at(-1)?.type !== "text") return;
+        vibrate(VibrationPatterns.tap);
+      },
+
       sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithToolCalls,
       transport: new DefaultChatTransport({
         api: "/api/chat",
         body: { autonomyMode },
       }),
     });
-  const steps: TraceStep[] = deriveTrace(messages, status);
+
+  const tSteps = useTranslations("Steps");
+  const traceSteps: TraceStep[] = agent.getSteps(messages, status, tSteps);
   const hasToolActivity: boolean = messages.some(
     ({ parts, role }) => role === "assistant" && parts.some(({ type }) => type.startsWith("tool-"))
   );
@@ -45,7 +58,7 @@ const Agent: React.FC = () => {
   const showMessages: boolean = messages.length > 0 && !showTrace;
 
   useEffect((): void => {
-    const activity: TAgentActivity = deriveActivity(messages, status);
+    const activity: TAgentActivity = agent.getActivity(messages, status);
 
     setActivity(activity);
     setChatMessages(messages);
@@ -55,11 +68,11 @@ const Agent: React.FC = () => {
     <div className={wrapperClass}>
       <Heading {...{ setMessages, stop }} />
 
-      <div className={contentClass}>
+      <div className={contentClass[showMessages || showTrace ? "default" : "scrollable"]}>
         {showMessages || showTrace ? (
           <Chat>
             {showMessages && <Messages {...{ messages }} />}
-            {showTrace && <Trace {...{ addToolOutput, steps }} />}
+            {showTrace && <Trace {...{ addToolOutput, traceSteps }} />}
           </Chat>
         ) : (
           <Hero />

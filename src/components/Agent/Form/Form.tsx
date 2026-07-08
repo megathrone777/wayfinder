@@ -1,4 +1,5 @@
 import React, { useId } from "react";
+import { useTranslations } from "next-intl";
 import NextForm from "next/form";
 
 import { Button, Icon } from "@/ui";
@@ -16,6 +17,7 @@ import type { TProps } from "./Form.types";
 
 const Form: React.FC<TProps> = ({ isRunning, sendMessage }) => {
   const textareaId = useId();
+  const t = useTranslations("Chat");
 
   const handleTextareaKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>): void => {
     if ((event.key === "Enter" || event.key === "NumpadEnter") && !event.shiftKey) {
@@ -50,7 +52,7 @@ const Form: React.FC<TProps> = ({ isRunning, sendMessage }) => {
           id={textareaId}
           name="message"
           onKeyDown={handleTextareaKeyDown}
-          placeholder="Describe your trip..."
+          placeholder={t("placeholder")}
           spellCheck="false"
         />
 
@@ -61,7 +63,7 @@ const Form: React.FC<TProps> = ({ isRunning, sendMessage }) => {
               id="return"
             />
 
-            <span>to plan</span>
+            <span>{t("hint")}</span>
           </p>
 
           <Button
@@ -70,7 +72,7 @@ const Form: React.FC<TProps> = ({ isRunning, sendMessage }) => {
             size="normal"
             type="submit"
           >
-            Plan trip
+            {t("planTrip")}
           </Button>
         </div>
       </NextForm>

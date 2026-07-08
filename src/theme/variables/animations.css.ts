@@ -58,6 +58,16 @@ const animations = {
     "80%": { opacity: 1 },
     "100%": { opacity: 0, visibility: "hidden" },
   }),
+
+  pulse: keyframes({
+    "0%, 100%": {
+      opacity: 1,
+    },
+
+    "50%": {
+      opacity: 0.3,
+    },
+  }),
 };
 
 export { animations };

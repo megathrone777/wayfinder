@@ -1,5 +1,7 @@
 import type { ChatStatus } from "ai";
+import type { useTranslations } from "next-intl";
 
+type Translate = ReturnType<typeof useTranslations<"Steps">>;
 type TAgentPart = TAgentUIMessage["parts"][number];
 type ToolPart = Extract<TAgentPart, { state: string }>;
 type ToolType = ToolPart["type"];
@@ -26,92 +28,96 @@ const toStatus = (part: ToolPart | undefined): TraceStatus => {
   }
 };
 
-const deriveTrace = (messages: TAgentUIMessage[], status: ChatStatus): TraceStep[] => {
-  const busy = status === "submitted" || status === "streaming";
+const getSteps = (messages: TAgentUIMessage[], status: ChatStatus, t: Translate): TraceStep[] => {
+  const isRunning = status === "submitted" || status === "streaming";
   const firstUserText = messages.find(({ role }) => role === "user")?.parts.find(isTextPart)?.text;
-
-  // Auto-resubmit (sendAutomaticallyWhen) splits one logical turn across several
-  // assistant messages, so gather tool parts from all of them, not just the last.
   const parts = messages
-    .filter(({ role }) => role === "assistant")
+    .filter(({ role }: TAgentUIMessage): boolean => role === "assistant")
     .flatMap(({ parts: messageParts }) => messageParts);
 
   const flights = findToolPart(parts, "tool-searchFlights");
   const hotels = findToolPart(parts, "tool-searchHotels");
-  const book = findToolPart(parts, "tool-bookTrip");
+  const booking = findToolPart(parts, "tool-bookTrip");
 
   const flightsStatus = toStatus(flights);
   const hotelsStatus = toStatus(hotels);
-
-  // The itinerary is being assembled once both searches are done and before a
-  // booking is proposed; it is finished as soon as a booking step appears.
   const searchesDone = flightsStatus === "done" && hotelsStatus === "done";
 
   let itineraryStatus: TraceStatus = "queued";
 
-  if (book) itineraryStatus = "done";
-  else if (searchesDone) itineraryStatus = busy ? "active" : "done";
+  if (booking) {
+    itineraryStatus = "done";
+  } else if (searchesDone) {
+    itineraryStatus = isRunning ? "active" : "done";
+  }
 
-  // Human-in-the-loop: an input-available booking is awaiting the user.
   let confirmStatus: TraceStatus = "queued";
 
-  if (book?.state === "input-available") confirmStatus = "waiting";
-  else if (book?.state === "output-available")
-    confirmStatus = book.output.confirmed ? "done" : "error";
-  else if (book) confirmStatus = "active";
+  if (booking?.state === "input-available") {
+    confirmStatus = "waiting";
+  } else if (booking?.state === "output-available") {
+    confirmStatus = booking.output.confirmed ? "done" : "error";
+  } else if (booking) {
+    confirmStatus = "active";
+  }
 
-  const confirmed = book?.state === "output-available" && book.output.confirmed;
+  const isConfirmed = booking?.state === "output-available" && booking.output.confirmed;
 
   let finalizeStatus: TraceStatus = "queued";
 
-  if (confirmed) finalizeStatus = busy ? "active" : "done";
+  if (isConfirmed) {
+    finalizeStatus = isRunning ? "active" : "done";
+  }
 
   return [
     {
       detail: firstUserText,
       id: "parse-intent",
       status: firstUserText ? "done" : "queued",
-      title: "Parse intent",
+      title: t("title.parse-intent"),
     },
     {
-      detail: flights?.input && `${flights.input.cityFrom} \u21C4 ${flights.input.cityTo}`,
+      detail: flights?.input && `${flights.input.cityFrom} ⇄ ${flights.input.cityTo}`,
       id: "search-flights",
       status: flightsStatus,
-      title: "Search flights",
+      title: t("title.search-flights"),
     },
     {
       detail: hotels?.input?.city,
       id: "search-stays",
       status: hotelsStatus,
-      title: "Search stays",
+      title: t("title.search-stays"),
     },
     {
-      detail: searchesDone ? "Balancing pace + travel time" : undefined,
+      detail: searchesDone ? t("detail.assemble-itinerary") : undefined,
       id: "assemble-itinerary",
       status: itineraryStatus,
-      title: "Assemble itinerary",
+      title: t("title.assemble-itinerary"),
     },
     {
       approval:
-        book?.state === "input-available"
+        booking?.state === "input-available"
           ? {
-              itinerarySummary: book.input.itinerarySummary,
-              toolCallId: book.toolCallId,
-              totalPrice: book.input.totalPrice,
+              itinerarySummary: booking.input.itinerarySummary,
+              toolCallId: booking.toolCallId,
+              totalPrice: booking.input.totalPrice,
             }
           : undefined,
-      detail: book?.input && `Booking for $${book.input.totalPrice}`,
+      detail:
+        typeof booking?.input?.totalPrice === "number"
+          ? t("detail.confirm", { price: booking.input.totalPrice })
+          : undefined,
       id: "confirm",
       status: confirmStatus,
-      title: "Confirm with traveler",
+      title: t("title.confirm"),
     },
     {
-      detail: confirmed ? "Fares locked, room reserved" : "Lock fares, reserve room",
+      detail: isConfirmed ? t("detail.finalize-locked") : t("detail.finalize-pending"),
       id: "finalize",
       status: finalizeStatus,
-      title: "Finalize & book",
+      title: t("title.finalize"),
     },
   ];
 };
 
-export { deriveTrace };
+export { getSteps };

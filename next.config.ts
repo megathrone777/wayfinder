@@ -1,4 +1,5 @@
 import { createVanillaExtractPlugin } from "@vanilla-extract/next-plugin";
+import createNextIntlPlugin from "next-intl/plugin";
 
 import type { NextConfig } from "next";
 
@@ -8,20 +9,19 @@ const withVanillaExtract = createVanillaExtractPlugin({
   },
 });
 
+const withNextIntl = createNextIntlPlugin({
+  requestConfig: "./src/i18n/request.ts",
+});
+
 const config: NextConfig = {
   allowedDevOrigins: ["192.168.0.227", "192.168.0.154"],
   images: {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     dangerouslyAllowSVG: true,
-    formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 31536000,
-    remotePatterns: [
-      {
-        hostname: "*.public.blob.vercel-storage.com",
-        protocol: "https",
-      },
-    ],
+  },
+  outputFileTracingIncludes: {
+    "**/*": ["./src/services/mailer/template/**/*.pug"],
   },
   reactStrictMode: false,
   redirects: () => [
@@ -32,7 +32,8 @@ const config: NextConfig = {
       source: "/:path*",
     },
   ],
+  serverExternalPackages: ["pug", "nodemailer"],
   typedRoutes: true,
 };
 
-export default withVanillaExtract(config);
+export default withNextIntl(withVanillaExtract(config));

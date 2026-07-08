@@ -1,14 +1,21 @@
-import { style } from "@/theme";
+import { calc } from "@vanilla-extract/css-utils";
 
-export const wrapperClass = style(({ colors, devices }) => ({
+import { style, styleVariants } from "@/theme";
+
+export const wrapperClass = style(({ colors, devices, safeAreas }) => ({
   backgroundColor: colors.blackDarker,
   display: "flex",
   flexDirection: "column",
   height: "100%",
   overflow: "hidden",
+  paddingBottom: 16,
   width: "100%",
 
   "@media": {
+    [devices.pointerCoarse]: {
+      paddingBottom: `${calc("16px").add(safeAreas.insetBottom)}`,
+    },
+
     [devices.tablet]: {
       flexBasis: 470,
       flexShrink: 0,
@@ -16,11 +23,27 @@ export const wrapperClass = style(({ colors, devices }) => ({
   },
 }));
 
-export const contentClass = style({
-  display: "flex",
-  flexDirection: "column",
-  flexGrow: 1,
-  height: "100%",
-  overflow: "hidden",
-  width: "100%",
-});
+export const contentClass = styleVariants(
+  {
+    default: {
+      overflow: "hidden",
+    },
+
+    scrollable: {
+      overflowY: "auto",
+      scrollbarWidth: "none",
+    },
+  },
+
+  (scrollable) => [
+    {
+      display: "flex",
+      flexDirection: "column",
+      flexGrow: 1,
+      rowGap: 22,
+      width: "100%",
+    },
+
+    scrollable,
+  ]
+);

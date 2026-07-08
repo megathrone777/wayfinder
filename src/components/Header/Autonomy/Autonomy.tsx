@@ -1,27 +1,16 @@
 "use client";
 import React from "react";
+import { useTranslations } from "next-intl";
 
 import { useAgentStore } from "@/store";
 
 import { wrapperClass, buttonClass, listClass, titleClass } from "./Autonomy.css";
 
-const autonomies: TAgentAutonomy[] = [
-  {
-    label: "Ask always",
-    mode: "ask-always",
-  },
-  {
-    label: "Ask before booking",
-    mode: "ask-before-booking",
-  },
-  {
-    label: "Full auto",
-    mode: "auto",
-  },
-];
+const autonomies: TAgentAutonomyMode[] = ["ask-always", "ask-before-booking", "auto"];
 
 const Autonomy: React.FC = () => {
   const { autonomyMode, setAutonomyMode } = useAgentStore();
+  const t = useTranslations("Autonomy");
 
   const handleButtonClick = ({ currentTarget }: React.SyntheticEvent<HTMLButtonElement>): void => {
     setAutonomyMode(currentTarget.value as TAgentAutonomyMode);
@@ -29,11 +18,11 @@ const Autonomy: React.FC = () => {
 
   return (
     <div className={wrapperClass}>
-      <p className={titleClass}>Autonomy</p>
+      <p className={titleClass}>{t("title")}</p>
 
       {autonomies && !!autonomies.length && (
         <ul className={listClass}>
-          {autonomies.map<React.ReactElement>(({ label, mode }: TAgentAutonomy) => (
+          {autonomies.map<React.ReactElement>((mode: TAgentAutonomyMode) => (
             <li key={`autonomy-menu-item-${mode}`}>
               <button
                 className={buttonClass[autonomyMode === mode ? "active" : "default"]}
@@ -41,7 +30,7 @@ const Autonomy: React.FC = () => {
                 type="button"
                 value={mode}
               >
-                {label}
+                {t(mode)}
               </button>
             </li>
           ))}

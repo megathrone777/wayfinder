@@ -1,8 +1,9 @@
+"use server";
 import { createTransport } from "nodemailer";
 
 import { generateTemplate } from "./generateTemplate";
 
-const sendBookingEmail = async (booking: TBooking): Promise<boolean> => {
+const sendEmail = async (booking: TBooking): Promise<boolean> => {
   if (process.env.EMAIL_ORDER_CONFIRMATION_ENABLED !== "true") return false;
   const emailAddress = process.env.EMAIL_ADDRESS;
   const emailPassword = process.env.EMAIL_APP_PASSWORD;
@@ -37,4 +38,4 @@ const sendBookingEmail = async (booking: TBooking): Promise<boolean> => {
   }
 };
 
-export { sendBookingEmail };
+export { sendEmail };

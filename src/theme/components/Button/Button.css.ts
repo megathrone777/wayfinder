@@ -76,7 +76,6 @@ export const buttonClass = style(({ easing }) => ({
   display: "inline-flex",
   fontWeight: 600,
   justifyContent: "center",
-  lineHeight: 1,
   outline: "none",
   textDecoration: "none",
   transition: `background-color 0.25s ${easing}`,
@@ -93,5 +92,4 @@ export const iconClass = style({
   color: "inherit",
   height: 15,
   minWidth: 15,
-  transform: "translateY(1px)",
 });

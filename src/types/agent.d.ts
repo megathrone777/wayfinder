@@ -1,4 +1,4 @@
-import type { tools } from "@/services/ai/tools";
+import type { tools } from "@/services/agent/tools";
 
 import type { InferUITools, UIMessage } from "ai";
 
