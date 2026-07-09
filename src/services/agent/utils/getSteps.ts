@@ -20,11 +20,23 @@ const toStatus = (part: ToolPart | undefined): TraceStatus => {
   switch (part.state) {
     case "output-available":
       return "done";
+    case "output-denied":
     case "output-error":
       return "error";
+    case "approval-requested":
+      return "waiting";
     default:
       return "active";
   }
+};
+
+const toApproval = (part: ToolPart | undefined): TraceApproval | undefined => {
+  if (part?.state !== "approval-requested") return undefined;
+
+  return {
+    approvalId: part.approval.id,
+    totalPrice: part.type === "tool-bookTrip" ? part.input.totalPrice : undefined,
+  };
 };
 
 const getSteps = (messages: TAgentUIMessage[], status: ChatStatus, t: Translate): TraceStep[] => {
@@ -55,8 +67,10 @@ const getSteps = (messages: TAgentUIMessage[], status: ChatStatus, t: Translate)
 
   let confirmStatus: TraceStatus = "queued";
 
-  if (booking?.state === "input-available") {
+  if (booking?.state === "approval-requested") {
     confirmStatus = "waiting";
+  } else if (booking?.state === "output-denied") {
+    confirmStatus = "error";
   } else if (booking?.state === "output-available") {
     confirmStatus = booking.output.confirmed ? "done" : "error";
   } else if (booking) {
@@ -79,12 +93,14 @@ const getSteps = (messages: TAgentUIMessage[], status: ChatStatus, t: Translate)
       title: t("title.parse-intent"),
     },
     {
+      approval: toApproval(flights),
       detail: flights?.input && `${flights.input.cityFrom} ⇄ ${flights.input.cityTo}`,
       id: "search-flights",
       status: flightsStatus,
       title: t("title.search-flights"),
     },
     {
+      approval: toApproval(hotels),
       detail: hotels?.input?.city,
       id: "search-stays",
       status: hotelsStatus,
@@ -97,14 +113,7 @@ const getSteps = (messages: TAgentUIMessage[], status: ChatStatus, t: Translate)
       title: t("title.assemble-itinerary"),
     },
     {
-      approval:
-        booking?.state === "input-available"
-          ? {
-              itinerarySummary: booking.input.itinerarySummary,
-              toolCallId: booking.toolCallId,
-              totalPrice: booking.input.totalPrice,
-            }
-          : undefined,
+      approval: toApproval(booking),
       detail:
         typeof booking?.input?.totalPrice === "number"
           ? t("detail.confirm", { price: booking.input.totalPrice })

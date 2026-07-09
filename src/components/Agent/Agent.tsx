@@ -2,7 +2,11 @@
 import React, { useEffect } from "react";
 import { useChat } from "@ai-sdk/react";
 import useVibration, { VibrationPatterns } from "@luxonauta/use-vibration";
-import { DefaultChatTransport, lastAssistantMessageIsCompleteWithToolCalls } from "ai";
+import {
+  DefaultChatTransport,
+  lastAssistantMessageIsCompleteWithApprovalResponses,
+  lastAssistantMessageIsCompleteWithToolCalls,
+} from "ai";
 import { useTranslations } from "next-intl";
 import { useShallow } from "zustand/react/shallow";
 
@@ -30,7 +34,7 @@ const Agent: React.FC = () => {
   );
   const layoutView = useLayoutStore(({ view }) => view);
 
-  const { addToolOutput, messages, sendMessage, setMessages, status, stop } =
+  const { addToolApprovalResponse, messages, sendMessage, setMessages, status, stop } =
     useChat<TAgentUIMessage>({
       onFinish: ({ isAbort, isDisconnect, isError, message }): void => {
         if (!isSupported) return;
@@ -39,7 +43,9 @@ const Agent: React.FC = () => {
         vibrate(VibrationPatterns.tap);
       },
 
-      sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithToolCalls,
+      sendAutomaticallyWhen: (options): boolean =>
+        lastAssistantMessageIsCompleteWithToolCalls(options) ||
+        lastAssistantMessageIsCompleteWithApprovalResponses(options),
       transport: new DefaultChatTransport({
         api: "/api/chat",
         body: { autonomyMode },
@@ -73,7 +79,7 @@ const Agent: React.FC = () => {
         {showMessages || showTrace ? (
           <Chat>
             {showMessages && <Messages {...{ messages }} />}
-            {showTrace && <Trace {...{ addToolOutput, traceSteps }} />}
+            {showTrace && <Trace {...{ addToolApprovalResponse, traceSteps }} />}
           </Chat>
         ) : (
           <Hero />

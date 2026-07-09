@@ -5,11 +5,20 @@ export const wrapperClass = style({
 });
 
 export const layoutClass = styleVariants(
-  {
+  ({ devices }) => ({
     isClosed: {
       opacity: 0,
       transform: "translate3d(0, -6px, 0)",
       visibility: "hidden",
+
+      "@media": {
+        [devices.desktop]: {
+          opacity: 1,
+          position: "static",
+          transform: "none",
+          visibility: "visible",
+        },
+      },
     },
 
     isOpened: {
@@ -17,7 +26,7 @@ export const layoutClass = styleVariants(
       transform: "translate3d(0, 0, 0)",
       visibility: "visible",
     },
-  },
+  }),
 
   (state, { colors, devices, easing }) => [
     {
@@ -39,8 +48,13 @@ export const layoutClass = styleVariants(
       zIndex: 8,
 
       "@media": {
-        [devices.tablet]: {
-          display: "contents",
+        [devices.desktop]: {
+          backgroundColor: "transparent",
+          border: "none",
+          flexDirection: "row-reverse",
+          minWidth: 0,
+          padding: 0,
+          transition: "none",
         },
       },
     },
@@ -48,3 +62,11 @@ export const layoutClass = styleVariants(
     state,
   ]
 );
+
+export const burgerClass = style(({ devices }) => ({
+  "@media": {
+    [devices.desktop]: {
+      display: "none",
+    },
+  },
+}));

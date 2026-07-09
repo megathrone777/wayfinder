@@ -20,6 +20,7 @@ const colors = {
   whiteDarker: "#d6dbe2",
   whiteDarkest: "#8a919b",
   whiteLighter: "#eef1f5",
+  yellow: "#e6c85a",
 };
 
 export { colors };

@@ -4,9 +4,10 @@ import { createTransport } from "nodemailer";
 import { generateTemplate } from "./generateTemplate";
 
 const sendEmail = async (booking: TBooking): Promise<boolean> => {
-  if (process.env.EMAIL_ORDER_CONFIRMATION_ENABLED !== "true") return false;
+  if (!booking.clientEmail) return false;
   const emailAddress = process.env.EMAIL_ADDRESS;
   const emailPassword = process.env.EMAIL_APP_PASSWORD;
+  const isProduction: boolean = process.env.NODE_ENV === "production";
 
   try {
     const html = await generateTemplate({
@@ -18,13 +19,14 @@ const sendEmail = async (booking: TBooking): Promise<boolean> => {
       },
     });
     const transporter = createTransport({
-      auth: { pass: emailPassword, user: emailAddress },
-      host: "smtp.gmail.com",
+      auth: isProduction ? { pass: emailPassword, user: emailAddress } : undefined,
+      host: process.env.EMAIL_SMTP_HOST,
+      port: 1025,
       secure: false,
-      service: "gmail",
+      service: isProduction ? "gmail" : undefined,
     });
     const info = await transporter.sendMail({
-      from: emailAddress,
+      from: emailAddress ?? "Wayfinder <noreply@wayfinder.local>",
       html,
       subject: `${process.env.PUBLIC_URL?.replace(/^https?:\/\//, "") ?? ""}: Booking confirmation №489`,
       to: booking.clientEmail,

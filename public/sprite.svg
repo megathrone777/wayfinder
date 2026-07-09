@@ -7,6 +7,33 @@
 
   <symbol
     fill="none"
+    id="closeIcon"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M18 6 6 18" />
+    <path d="m6 6 12 12" />
+  </symbol>
+
+  <symbol
+    fill="none"
+    id="downloadIcon"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 15V3" />
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+    <path d="m7 10 5 5 5-5" />
+  </symbol>
+
+  <symbol
+    fill="none"
     id="moveRightIcon"
     stroke-linecap="round"
     stroke-linejoin="round"
@@ -72,6 +99,19 @@
         animation-timing-function: ease-in-out;
       "
     />
+  </symbol>
+
+  <symbol
+    fill="none"
+    id="mailIcon"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+    <rect x="2" y="4" width="20" height="16" rx="2" />
   </symbol>
 
   <symbol

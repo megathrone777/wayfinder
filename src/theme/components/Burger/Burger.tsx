@@ -4,10 +4,13 @@ import { buttonClass, lineClass } from "./Burger.css";
 
 import type { TProps } from "./Burger.types";
 
-const Burger: React.FC<TProps> = ({ isOpened, onClick }) => (
+const Burger: React.FC<TProps> = ({ className, isOpened, onClick }) => (
   <button
     {...{ onClick }}
-    className={buttonClass[isOpened ? "isOpened" : "default"]}
+    className={`
+      ${buttonClass[isOpened ? "isOpened" : "default"]}
+      ${className && !!className.length ? ` ${className}` : ""}
+    `}
     type="button"
   >
     <span className={lineClass[isOpened ? "leftOpened" : "left"]} />

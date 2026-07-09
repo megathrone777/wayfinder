@@ -14,6 +14,7 @@
     "buttonApprove": "Schválit",
     "buttonReject": "Zamítnout",
     "text": "Připraveno rezervovat lety + ubytování za ${totalPrice}. Tato akce utrácí peníze — pro pokračování potvrďte.",
+    "textSearch": "Agent chce provést tento krok. Potvrďte pro pokračování.",
     "title": "Vyžaduje se schválení"
   },
 
@@ -91,6 +92,16 @@
     "heading": "Záznam uvažování",
     "queued": "Ve frontě",
     "waiting": "Čeká"
+  },
+
+  "Trip": {
+    "download": "Stáhnout",
+    "emailPlaceholder": "you@example.com",
+    "send": "Odeslat",
+    "sendError": "Nepodařilo se odeslat — zkuste to znovu.",
+    "sending": "Odesílání...",
+    "sendToEmail": "Odeslat na e-mail",
+    "sent": "Odesláno na {email}"
   },
 
   "Toolbar": {

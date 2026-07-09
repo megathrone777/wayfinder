@@ -8,27 +8,15 @@ import { wrapperClass, headingClass, listClass } from "./Trace.css";
 
 import type { TProps } from "./Trace.types";
 
-const Trace: React.FC<TProps> = ({ addToolOutput, traceSteps }) => {
+const Trace: React.FC<TProps> = ({ addToolApprovalResponse, traceSteps }) => {
   const t = useTranslations("Trace");
 
-  const handleApprove = (toolCallId: string): void => {
-    void addToolOutput({
-      output: {
-        confirmed: true,
-        itinerarySummary: "",
-        totalPrice: 0,
-      },
-      tool: "bookTrip",
-      toolCallId,
-    });
+  const handleApprove = (approvalId: string): void => {
+    void addToolApprovalResponse({ approved: true, id: approvalId });
   };
 
-  const handleReject = (toolCallId: string): void => {
-    void addToolOutput({
-      output: { confirmed: false },
-      tool: "bookTrip",
-      toolCallId,
-    });
+  const handleReject = (approvalId: string): void => {
+    void addToolApprovalResponse({ approved: false, id: approvalId });
   };
 
   return (
@@ -46,9 +34,9 @@ const Trace: React.FC<TProps> = ({ addToolOutput, traceSteps }) => {
             >
               {approval && (
                 <Approval
+                  approvalId={approval.approvalId}
                   onApprove={handleApprove}
                   onReject={handleReject}
-                  toolCallId={approval.toolCallId}
                   totalPrice={approval.totalPrice}
                 />
               )}

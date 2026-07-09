@@ -26,10 +26,16 @@ const scaleIn = keyframes({
   },
 });
 
-export const wrapperClass = style({
+export const wrapperClass = style(({ devices }) => ({
   borderTop: `1px solid ${rgba("255, 255, 255", 0.12)}`,
   paddingBlock: 8,
-});
+
+  "@media": {
+    [devices.desktop]: {
+      display: "none",
+    },
+  },
+}));
 
 export const layoutClass = style({
   alignItems: "center",

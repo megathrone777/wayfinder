@@ -1,4 +1,13 @@
-export type TIconId = "angle" | "checkmark" | "exclamation" | "moveRight" | "refresh" | "return";
+export type TIconId =
+  | "angle"
+  | "checkmark"
+  | "close"
+  | "download"
+  | "exclamation"
+  | "mail"
+  | "moveRight"
+  | "refresh"
+  | "return";
 
 export interface TProps {
   className?: React.HTMLAttributes<HTMLElement>["className"];

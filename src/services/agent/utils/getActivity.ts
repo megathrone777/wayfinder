@@ -25,14 +25,13 @@ const getActivity = (messages: TAgentUIMessage[], status: ChatStatus): TAgentAct
   const book = [...parts].reverse().find(isBookTripPart);
 
   if (book) {
-    const { output, state } = book;
+    const { state } = book;
 
-    if (state === "input-available") {
-      return busy ? "booking" : "waiting";
-    }
+    if (state === "approval-requested") return busy ? "booking" : "waiting";
+    if (state === "output-denied") return "trip-rejected";
 
     if (state === "output-available") {
-      if (output.confirmed) return busy ? "booking" : "trip-confirmed";
+      if (book.output.confirmed) return busy ? "booking" : "trip-confirmed";
       if (!busy) return "trip-rejected";
     }
   }
@@ -45,6 +44,13 @@ const getActivity = (messages: TAgentUIMessage[], status: ChatStatus): TAgentAct
 
     return "building-itinerary";
   }
+
+  // A search awaiting the traveler's approval (ask-always) is a pending prompt.
+  const awaitingApproval = parts.some(
+    (part) => "state" in part && part.state === "approval-requested"
+  );
+
+  if (awaitingApproval) return "waiting";
 
   return "idle";
 };

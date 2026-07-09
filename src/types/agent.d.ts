@@ -25,9 +25,8 @@ declare global {
   }
 
   interface TraceApproval {
-    itinerarySummary: string;
-    toolCallId: string;
-    totalPrice: number;
+    approvalId: string;
+    totalPrice?: number;
   }
 
   interface TraceStep {

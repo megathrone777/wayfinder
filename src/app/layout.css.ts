@@ -6,9 +6,15 @@ export const wrapperClass = style({
   height: "100%",
 });
 
-export const layoutClass = style({
+export const layoutClass = style(({ devices }) => ({
   display: "flex",
   flexDirection: "column",
   flexGrow: 1,
   overflow: "hidden",
-});
+
+  "@media": {
+    [devices.desktop]: {
+      flexDirection: "row",
+    },
+  },
+}));

@@ -1,21 +1,21 @@
 import React from "react";
 
-import { Button, Icon } from "@/ui";
+import { Icon } from "@/ui";
+
+import { Actions } from "./Actions";
 
 import {
   wrapperClass,
-  actionsClass,
   badgeClass,
-  costsClass,
   dayCodeClass,
   dayLabelClass,
   dayClass,
   daysClass,
   footerClass,
   headerClass,
+  iconClass,
   referenceClass,
   titleClass,
-  totalClass,
 } from "./Trip.css";
 
 import type { TripSummary } from "./Trip.types";
@@ -25,14 +25,17 @@ const Trip: React.FC = async () => {
   const summary = (await response.json()) as TripSummary;
 
   if (summary && !!Object.keys(summary).length) {
-    const { costs, days, reference } = summary;
+    const { days, reference } = summary;
 
     return (
       <div className={wrapperClass}>
         <div className={headerClass}>
           <p className={titleClass}>
             <span className={badgeClass}>
-              <Icon id="checkmark" />
+              <Icon
+                className={iconClass}
+                id="checkmark"
+              />
             </span>
 
             <span>Trip confirmed</span>
@@ -54,27 +57,7 @@ const Trip: React.FC = async () => {
         </div>
 
         <div className={footerClass}>
-          <p className={costsClass}>
-            Flights ${costs.flights} <strong>·</strong> Stay ${costs.stay.toLocaleString()}{" "}
-            <strong>·</strong>{" "}
-            <span className={totalClass}>Total ${costs.total.toLocaleString()}</span>
-          </p>
-
-          <div className={actionsClass}>
-            <Button
-              size="normal"
-              template="tertiary"
-            >
-              Add to calendar
-            </Button>
-
-            <Button
-              size="normal"
-              template="secondary"
-            >
-              Download
-            </Button>
-          </div>
+          <Actions />
         </div>
       </div>
     );

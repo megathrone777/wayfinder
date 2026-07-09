@@ -11,7 +11,7 @@ import {
   plotClass,
   routeLineClass,
   svgClass,
-} from "./RouteCanvas.css";
+} from "./Route.css";
 
 export interface TRouteStop {
   label: string;
@@ -47,7 +47,7 @@ const buildRoute = (stops: TRouteStop[], closed: boolean): { d: string; length: 
   return { d, length: Math.ceil(length) + 4 };
 };
 
-const RouteCanvas: React.FC = async () => {
+const Route: React.FC = async () => {
   const response = await fetch(`${process.env.PUBLIC_URL}/mock/route.json`);
   const stops = (await response.json()) as TRouteStop[];
   const { d, length } = buildRoute(stops, true);
@@ -116,4 +116,4 @@ const RouteCanvas: React.FC = async () => {
   );
 };
 
-export { RouteCanvas };
+export { Route };

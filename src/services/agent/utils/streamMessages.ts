@@ -9,8 +9,9 @@ import {
 import { localeMeta, type TLocale } from "@/i18n";
 
 import { model } from "../model";
+import { tools } from "../tools";
 
-import { combineTools } from "./combineTools";
+import { getApproval } from "./getApproval";
 
 const streamMessages = async (
   messages: TAgentUIMessage[],
@@ -33,6 +34,10 @@ const streamMessages = async (
       passing the number of days in the requested trip. Explain each step
       briefly as you go.
 
+      Some tool calls may require the traveler's approval before they run.
+      If the traveler denies a step, do not retry it silently: acknowledge
+      that the step was declined and ask how they would like to proceed.
+
       The search tools return mock/sample data for a demo. Treat whatever
       the tools return as the flights and hotels for the route the user
       requested, regardless of the origin, destination, dates, or other
@@ -50,7 +55,8 @@ const streamMessages = async (
         cancelled and offer to adjust the plan or try again.
     `,
 
-    tools: combineTools(autonomyMode),
+    toolApproval: getApproval(autonomyMode),
+    tools,
   });
 
   return createUIMessageStreamResponse({

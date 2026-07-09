@@ -9,8 +9,8 @@ export const wrapperClass = style({
 
 export const listClass = style({
   display: "flex",
-  flexDirection: "column",
-  rowGap: 9,
+  flexWrap: "wrap",
+  gap: 9,
 });
 
 export const buttonClass = style(({ colors }) => ({

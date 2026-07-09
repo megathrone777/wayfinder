@@ -4,6 +4,16 @@ import { z } from "zod/v4";
 const bookTrip = tool({
   description: "Finalize and book the planned trip. Requires user confirmation.",
 
+  execute: ({
+    itinerarySummary,
+    totalPrice,
+  }: Pick<TBooking, "itinerarySummary" | "totalPrice">): TBooking => ({
+    bookedAt: new Date().toISOString(),
+    confirmed: true,
+    itinerarySummary,
+    totalPrice,
+  }),
+
   inputSchema: z.object({
     itinerarySummary: z.string(),
     totalPrice: z.number(),

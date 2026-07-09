@@ -17,8 +17,10 @@ import {
 
 import type { TProps } from "./Approval.types";
 
-const Approval: React.FC<TProps> = ({ onApprove, onReject, toolCallId, totalPrice }) => {
+const Approval: React.FC<TProps> = ({ approvalId, onApprove, onReject, totalPrice }) => {
   const t = useTranslations("Approval");
+  const text =
+    typeof totalPrice === "number" ? t("text", { totalPrice }) : t("textSearch");
 
   const handleApproveClick = ({ currentTarget }: React.SyntheticEvent<HTMLButtonElement>): void => {
     onApprove(currentTarget.value);
@@ -41,14 +43,14 @@ const Approval: React.FC<TProps> = ({ onApprove, onReject, toolCallId, totalPric
         <h6 className={titleClass}>{t("title")}</h6>
       </div>
 
-      <div className={contentClass}>{t("text", { totalPrice })}</div>
+      <div className={contentClass}>{text}</div>
 
       <div className={footerClass}>
         <button
           className={buttonApproveClass}
           onClick={handleApproveClick}
           type="button"
-          value={toolCallId}
+          value={approvalId}
         >
           {t("buttonApprove")}
         </button>
@@ -57,7 +59,7 @@ const Approval: React.FC<TProps> = ({ onApprove, onReject, toolCallId, totalPric
           className={buttonRejectClass}
           onClick={handleRejectClick}
           type="button"
-          value={toolCallId}
+          value={approvalId}
         >
           {t("buttonReject")}
         </button>

@@ -1,5 +1,4 @@
 {
-  "costs": { "flights": 842, "stay": 1140, "total": 1982 },
   "days": [
     { "code": "D1", "label": "Alfama" },
     { "code": "D2", "label": "Belém" },

@@ -16,9 +16,13 @@ import {
 
 import type { TProps } from "./Itinerary.types";
 
-const Itinerary: React.FC<TProps> = ({ caption, days }) => (
+const Itinerary: React.FC<TProps> = ({ days }) => (
   <Box
-    header={<p className={captionClass}>{caption ?? `${days.length} days · balanced pacing`}</p>}
+    header={
+      <p className={captionClass}>
+        {days.length} days <strong>·</strong> balanced pacing
+      </p>
+    }
     title="Itinerary"
   >
     <div className={listClass}>

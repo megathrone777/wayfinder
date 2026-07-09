@@ -21,7 +21,7 @@ const Button: React.FC<TProps> = ({
 }) => {
   const renderChildren = (): React.ReactElement => (
     <>
-      <span>{children}</span>
+      {children && <span>{children}</span>}
 
       {iconId && (
         <Icon

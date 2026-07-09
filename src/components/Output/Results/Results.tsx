@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
+import { useShallow } from "zustand/react/shallow";
 
 import { agent } from "@/services";
 import { useAgentStore, useLayoutStore } from "@/store";
 
 import { Flight } from "./Flight";
+import { Hotel } from "./Hotel";
 import { Itinerary } from "./Itinerary";
 
 import { wrapperClass } from "./Results.css";
@@ -12,30 +14,67 @@ import { wrapperClass } from "./Results.css";
 import type { TProps } from "./Results.types";
 
 const Results: React.FC<TProps> = ({ children }) => {
-  const messages = useAgentStore(({ messages }) => messages);
+  const { activity, messages } = useAgentStore(
+    useShallow(({ activity, messages }) => ({
+      activity,
+      messages,
+    }))
+  );
   const layoutView = useLayoutStore(({ view }) => view);
   const itinerary = agent.getOutput(messages, "tool-assembleItinerary");
   const flights = agent.getOutput(messages, "tool-searchFlights");
-  // const hotels = findOutput(parts, "tool-searchHotels");
+  const hotels = agent.getOutput(messages, "tool-searchHotels");
 
-  // if (!itinerary && !flights && !hotels) return null;
-  if (!itinerary) return null;
-  if (!flights) return null;
-  const [recommendedFlight] = flights.output;
+  const renderFlight = (): null | React.ReactElement => {
+    if (!flights) return null;
+    const [recommendedFlight] = flights.output;
 
-  return (
-    <div className={wrapperClass[layoutView]}>
-      {recommendedFlight && (
+    if (recommendedFlight) {
+      return (
         <Flight
           {...recommendedFlight}
           flightsTotal={flights.output.length}
         />
-      )}
+      );
+    }
 
-      {itinerary && <Itinerary days={itinerary.output} />}
+    return null;
+  };
 
-      {/* {hotels && <StayCard hotels={hotels.output} />} */}
-      {children}
+  const renderItinerary = (): null | React.ReactElement => {
+    if (!itinerary) return null;
+    const itineraryDays: TItineraryDay[] = itinerary.output;
+
+    if (itineraryDays && !!itineraryDays.length) {
+      return <Itinerary days={itineraryDays} />;
+    }
+
+    return null;
+  };
+
+  const renderHotel = (): null | React.ReactElement => {
+    if (!hotels) return null;
+    const [recommendedHotel] = hotels.output;
+    const nightsTotal: number = itinerary?.output.length ?? 0;
+
+    if (recommendedHotel) {
+      return (
+        <Hotel
+          {...recommendedHotel}
+          {...{ nightsTotal }}
+        />
+      );
+    }
+
+    return null;
+  };
+
+  return (
+    <div className={wrapperClass[layoutView]}>
+      {renderFlight()}
+      {renderItinerary()}
+      {renderHotel()}
+      {activity === "trip-confirmed" && children}
     </div>
   );
 };

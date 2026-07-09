@@ -1,10 +1,18 @@
 import { rgba, style, styleVariants } from "@/theme";
 
-export const wrapperClass = style({
+export const wrapperClass = style(({ devices }) => ({
   display: "flex",
   flexDirection: "column",
   rowGap: 8,
-});
+
+  "@media": {
+    [devices.desktop]: {
+      alignItems: "center",
+      columnGap: 11,
+      flexDirection: "row",
+    },
+  },
+}));
 
 export const titleClass = style(({ colors, devices, fonts }) => ({
   color: colors.whiteDarkest,
@@ -15,17 +23,24 @@ export const titleClass = style(({ colors, devices, fonts }) => ({
   textTransform: "uppercase",
 
   "@media": {
-    [devices.tablet]: {
+    [devices.desktop]: {
       fontSize: 14,
     },
   },
 }));
 
-export const listClass = style({
+export const listClass = style(({ devices }) => ({
   display: "flex",
   flexDirection: "column",
   rowGap: 5,
-});
+
+  "@media": {
+    [devices.desktop]: {
+      columnGap: 4,
+      flexDirection: "row",
+    },
+  },
+}));
 
 export const buttonClass = styleVariants(
   ({ colors }) => ({

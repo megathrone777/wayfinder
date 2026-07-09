@@ -3,15 +3,21 @@ import { calc } from "@vanilla-extract/css-utils";
 import { styleVariants } from "@/theme";
 
 export const wrapperClass = styleVariants(
-  {
+  ({ devices }) => ({
     agent: {
       display: "flex",
     },
 
     output: {
       display: "none",
+
+      "@media": {
+        [devices.desktop]: {
+          display: "flex",
+        },
+      },
     },
-  },
+  }),
 
   (view, { colors, devices, safeAreas }) => [
     {
@@ -27,7 +33,7 @@ export const wrapperClass = styleVariants(
           paddingBottom: `${calc("16px").add(safeAreas.insetBottom)}`,
         },
 
-        [devices.tablet]: {
+        [devices.desktop]: {
           flexBasis: 470,
           flexShrink: 0,
         },

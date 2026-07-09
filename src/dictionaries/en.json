@@ -11,9 +11,10 @@
   },
 
   "Approval": {
-    "buttonApprove": "Approve",
+    "buttonApprove": "Confirm",
     "buttonReject": "Reject",
     "text": "Ready to book flights + stay for ${totalPrice}. This action spends money — confirm to proceed.",
+    "textSearch": "The agent wants to run this step. Approve to let it continue.",
     "title": "Approval needed"
   },
 
@@ -91,6 +92,16 @@
     "heading": "Reasoning trace",
     "queued": "Queued",
     "waiting": "Waiting"
+  },
+
+  "Trip": {
+    "download": "Download",
+    "emailPlaceholder": "you@example.com",
+    "send": "Send",
+    "sendError": "Couldn't send — try again.",
+    "sending": "Sending...",
+    "sendToEmail": "Send to email",
+    "sent": "Sent to {email}"
   },
 
   "Toolbar": {

@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 import { useClickOutside } from "@/hooks";
 import { Burger } from "@/ui";
 
-import { wrapperClass, layoutClass } from "./Menu.css";
+import { wrapperClass, burgerClass, layoutClass } from "./Menu.css";
 
 import type { TProps } from "./Menu.types";
 
@@ -27,6 +27,7 @@ const Menu: React.FC<TProps> = ({ children }) => {
     >
       <Burger
         {...{ isOpened }}
+        className={burgerClass}
         onClick={handleBurgerClick}
       />
 

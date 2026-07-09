@@ -3,15 +3,21 @@ import { calc } from "@vanilla-extract/css-utils";
 import { styleVariants } from "@/theme";
 
 export const wrapperClass = styleVariants(
-  {
+  ({ devices }) => ({
     agent: {
       display: "none",
+
+      "@media": {
+        [devices.desktop]: {
+          display: "flex",
+        },
+      },
     },
 
     output: {
       display: "flex",
     },
-  },
+  }),
 
   (view, { colors, devices, safeAreas }) => [
     {
