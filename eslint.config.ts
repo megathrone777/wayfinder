@@ -302,7 +302,11 @@ const config = defineConfig([
     },
   },
   {
-    files: ["src/theme/utils/rgba.ts", "src/theme/variables/colors.ts"],
+    files: [
+      "src/theme/utils/rgba.ts",
+      "src/theme/variables/colors.ts",
+      "**/*.{test,spec}.{ts,tsx}",
+    ],
     rules: {
       "no-restricted-syntax": "off",
     },

@@ -16,7 +16,6 @@ describe("useDebouncedCallback", () => {
 
   it("calls the callback after the specified delay", () => {
     const callback = jest.fn() as unknown as TCallbackFn<[string, string]>;
-
     const { result } = renderHook(() => useDebouncedCallback(callback, 500));
 
     act(() => {
@@ -35,7 +34,6 @@ describe("useDebouncedCallback", () => {
 
   it("debounces multiple rapid calls", () => {
     const callback = jest.fn() as unknown as TCallbackFn<[string]>;
-
     const { result } = renderHook(() => useDebouncedCallback(callback, 300));
 
     act(() => {
@@ -94,7 +92,6 @@ describe("useDebouncedCallback", () => {
 
   it("calls with default 300ms delay when none specified", () => {
     const callback = jest.fn() as unknown as TCallbackFn<[string]>;
-
     const { result } = renderHook(() => useDebouncedCallback(callback));
 
     act(() => {
@@ -112,7 +109,6 @@ describe("useDebouncedCallback", () => {
 
   it("cleans up the timeout on unmount", () => {
     const callback = jest.fn() as unknown as TCallbackFn<[string]>;
-
     const { result, unmount } = renderHook(() => useDebouncedCallback(callback, 100));
 
     act(() => {
