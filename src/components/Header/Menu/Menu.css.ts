@@ -49,8 +49,11 @@ export const layoutClass = styleVariants(
 
       "@media": {
         [devices.desktop]: {
+          alignItems: "center",
           backgroundColor: "transparent",
           border: "none",
+          boxShadow: "none",
+          columnGap: 14,
           flexDirection: "row-reverse",
           minWidth: 0,
           padding: 0,

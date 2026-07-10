@@ -95,7 +95,8 @@ export const dayLabelClass = style({
 
 export const footerClass = style({
   alignItems: "center",
-  columnGap: 10,
   display: "flex",
+  flexWrap: "wrap",
+  gap: 10,
   justifyContent: "flex-end",
 });

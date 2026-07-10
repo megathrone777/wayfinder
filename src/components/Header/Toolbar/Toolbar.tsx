@@ -4,6 +4,8 @@ import React from "react";
 import { useAgentStore } from "@/store";
 import { Spot } from "@/ui";
 
+import { activityClass } from "./Toolbar.css";
+
 import type { TProps } from "./Toolbar.types";
 
 const Toolbar: React.FC<TProps> = ({ children }) => {
@@ -11,7 +13,12 @@ const Toolbar: React.FC<TProps> = ({ children }) => {
 
   return (
     <>
-      {activity !== "idle" && <Spot {...{ activity }} />}
+      {activity !== "idle" && (
+        <div className={activityClass}>
+          <Spot {...{ activity }} />
+        </div>
+      )}
+
       {children}
     </>
   );

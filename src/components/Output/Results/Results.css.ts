@@ -1,6 +1,6 @@
 import { calc } from "@vanilla-extract/css-utils";
 
-import { styleVariants } from "@/theme";
+import { rgba, style, styleVariants } from "@/theme";
 
 export const wrapperClass = styleVariants(
   ({ devices }) => ({
@@ -19,24 +19,17 @@ export const wrapperClass = styleVariants(
     },
   }),
 
-  (view, { colors, devices, safeAreas }) => [
+  (view, { colors, devices }) => [
     {
-      backgroundColor: colors.blackDarker,
+      backgroundColor: colors.black,
       flexDirection: "column",
       height: "100%",
-      overflowY: "auto",
-      padding: 16,
-      rowGap: 18,
-      scrollbarWidth: "none",
+      overflow: "hidden",
       width: "100%",
 
       "@media": {
-        [devices.pointerCoarse]: {
-          paddingBottom: `${calc("16px").add(safeAreas.insetBottom)}`,
-        },
-
-        [devices.tablet]: {
-          flexGrow: 1,
+        [devices.desktop]: {
+          borderLeft: `1px solid ${rgba("255, 255, 255", 0.12)}`,
         },
       },
     },
@@ -44,3 +37,44 @@ export const wrapperClass = styleVariants(
     view,
   ]
 );
+
+export const headerClass = style(({ devices }) => ({
+  borderBlock: `1px solid ${rgba("255, 255, 255", 0.12)}`,
+  borderLeft: `1px solid ${rgba("255, 255, 255", 0.12)}`,
+  display: "none",
+  height: 62,
+  minHeight: 62,
+
+  "@media": {
+    [devices.desktop]: {
+      alignItems: "center",
+      display: "flex",
+      paddingLeft: 12,
+    },
+  },
+}));
+
+export const hintClass = style(({ colors, fonts }) => ({
+  color: colors.whiteDarkest,
+  fontFamily: fonts.jetBrainsMono,
+  fontSize: 12,
+  letterSpacing: 1,
+  textTransform: "uppercase",
+}));
+
+export const contentClass = style(({ devices, safeAreas }) => ({
+  display: "flex",
+  flexDirection: "column",
+  flexGrow: 1,
+  height: "100%",
+  overflowY: "auto",
+  padding: 16,
+  rowGap: 18,
+  scrollbarWidth: "none",
+
+  "@media": {
+    [devices.pointerCoarse]: {
+      paddingBottom: `${calc("16px").add(safeAreas.insetBottom)}`,
+    },
+  },
+}));

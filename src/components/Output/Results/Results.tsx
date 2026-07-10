@@ -9,11 +9,11 @@ import { Flight } from "./Flight";
 import { Hotel } from "./Hotel";
 import { Itinerary } from "./Itinerary";
 
-import { wrapperClass } from "./Results.css";
+import { wrapperClass, headerClass, hintClass, contentClass } from "./Results.css";
 
 import type { TProps } from "./Results.types";
 
-const Results: React.FC<TProps> = ({ children }) => {
+const Results: React.FC<TProps> = ({ children, placeholder }) => {
   const { activity, messages } = useAgentStore(
     useShallow(({ activity, messages }) => ({
       activity,
@@ -71,10 +71,23 @@ const Results: React.FC<TProps> = ({ children }) => {
 
   return (
     <div className={wrapperClass[layoutView]}>
-      {renderFlight()}
-      {renderItinerary()}
-      {renderHotel()}
-      {activity === "trip-confirmed" && children}
+      <div className={headerClass}>
+        <p className={hintClass}>Output</p>
+      </div>
+
+      <div className={contentClass}>
+        {flights || itinerary || hotels ? (
+          <>
+            {renderFlight()}
+            {renderItinerary()}
+            {renderHotel()}
+          </>
+        ) : (
+          placeholder
+        )}
+
+        {activity === "trip-confirmed" && children}
+      </div>
     </div>
   );
 };

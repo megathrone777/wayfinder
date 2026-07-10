@@ -24,20 +24,24 @@ export const titleClass = style(({ colors, devices, fonts }) => ({
 
   "@media": {
     [devices.desktop]: {
-      fontSize: 14,
+      fontSize: 13,
     },
   },
 }));
 
-export const listClass = style(({ devices }) => ({
+export const listClass = style(({ colors, devices }) => ({
   display: "flex",
   flexDirection: "column",
   rowGap: 5,
 
   "@media": {
     [devices.desktop]: {
+      backgroundColor: colors.black,
+      border: `1px solid ${rgba("255, 255, 255", 0.13)}`,
+      borderRadius: 10,
       columnGap: 4,
       flexDirection: "row",
+      padding: 4,
     },
   },
 }));
@@ -66,7 +70,7 @@ export const buttonClass = styleVariants(
     },
   }),
 
-  (variant, { colors, easing }) => [
+  (variant, { colors, devices, easing }) => [
     {
       borderRadius: 9,
       borderStyle: "solid",
@@ -82,6 +86,12 @@ export const buttonClass = styleVariants(
       transitionTimingFunction: easing,
       whiteSpace: "nowrap",
       width: "100%",
+
+      "@media": {
+        [devices.desktop]: {
+          height: 34,
+        },
+      },
     },
 
     variant,
