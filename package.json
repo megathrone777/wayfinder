@@ -50,8 +50,8 @@
   "name": "wayfinder",
   "private": true,
   "scripts": {
-    "build": "jest --ci --runInBand && yarn lint && next build --turbopack",
-    "dev": "next dev --turbopack",
+    "build": "jest --ci --runInBand && yarn lint && next build",
+    "dev": "next dev",
     "lint": "eslint ./src --config eslint.config.ts --flag unstable_native_nodejs_ts_config",
     "start": "next start",
     "test": "jest",

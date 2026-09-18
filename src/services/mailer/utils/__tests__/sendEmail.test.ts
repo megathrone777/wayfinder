@@ -20,6 +20,18 @@ const booking = (overrides: Partial<TBooking> = {}): TBooking => ({
   ...overrides,
 });
 
+const setEnv = (updates: Record<string, string | undefined>): void => {
+  const env = process.env as unknown as Record<string, string | undefined>;
+
+  for (const [key, value] of Object.entries(updates)) {
+    if (value === undefined) {
+      delete env[key];
+    } else {
+      env[key] = value;
+    }
+  }
+};
+
 describe("sendEmail", () => {
   beforeEach(() => {
     sendMail.mockReset();
@@ -66,6 +78,104 @@ describe("sendEmail", () => {
 
     await expect(sendEmail(booking())).resolves.toBe(false);
     expect(spy).toHaveBeenCalled();
+
+    spy.mockRestore();
+  });
+
+  afterEach(() => {
+    setEnv({
+      EMAIL_ADDRESS: undefined,
+      EMAIL_APP_PASSWORD: undefined,
+      EMAIL_SMTP_HOST: undefined,
+      EMAIL_SMTP_PORT: undefined,
+      NODE_ENV: "test",
+    });
+  });
+
+  it("connects to a local SMTP without auth in development", async () => {
+    setEnv({ EMAIL_SMTP_HOST: "localhost", EMAIL_SMTP_PORT: "1025" });
+
+    sendMail.mockResolvedValue({ accepted: ["traveler@example.com"] });
+
+    await expect(sendEmail(booking())).resolves.toBe(true);
+
+    expect(mockedCreateTransport).toHaveBeenCalledWith({
+      auth: undefined,
+      host: "localhost",
+      port: 1025,
+      secure: false,
+    });
+  });
+
+  it("uses smtp.gmail.com:465 with auth in production by default", async () => {
+    setEnv({
+      EMAIL_ADDRESS: "sender@gmail.com",
+      EMAIL_APP_PASSWORD: "aaaa bbbb cccc dddd",
+      NODE_ENV: "production",
+    });
+
+    sendMail.mockResolvedValue({ accepted: ["traveler@example.com"] });
+
+    await sendEmail(booking());
+
+    expect(mockedCreateTransport).toHaveBeenCalledWith({
+      auth: { pass: "aaaa bbbb cccc dddd", user: "sender@gmail.com" },
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+    });
+  });
+
+  it("honors EMAIL_SMTP_HOST and EMAIL_SMTP_PORT in production", async () => {
+    setEnv({
+      EMAIL_ADDRESS: "sender@gmail.com",
+      EMAIL_APP_PASSWORD: "aaaa bbbb cccc dddd",
+      EMAIL_SMTP_HOST: "smtp.resend.com",
+      EMAIL_SMTP_PORT: "587",
+      NODE_ENV: "production",
+    });
+
+    sendMail.mockResolvedValue({ accepted: ["traveler@example.com"] });
+
+    await sendEmail(booking());
+
+    expect(mockedCreateTransport).toHaveBeenCalledWith({
+      auth: { pass: "aaaa bbbb cccc dddd", user: "sender@gmail.com" },
+      host: "smtp.resend.com",
+      port: 587,
+      secure: false,
+    });
+  });
+
+  it("returns false in production when credentials are missing", async () => {
+    const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+
+    setEnv({ EMAIL_ADDRESS: undefined, EMAIL_APP_PASSWORD: undefined, NODE_ENV: "production" });
+
+    await expect(sendEmail(booking())).resolves.toBe(false);
+
+    expect(mockedCreateTransport).not.toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith(expect.stringContaining("EMAIL_APP_PASSWORD"));
+
+    spy.mockRestore();
+  });
+
+  it("logs an actionable hint when the SMTP server rejects credentials with 535", async () => {
+    const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+
+    setEnv({
+      EMAIL_ADDRESS: "sender@gmail.com",
+      EMAIL_APP_PASSWORD: "aaaa bbbb cccc dddd",
+      NODE_ENV: "production",
+    });
+
+    sendMail.mockRejectedValue({ responseCode: 535 });
+
+    await expect(sendEmail(booking())).resolves.toBe(false);
+
+    expect(spy.mock.calls[0]?.[2]).toEqual(
+      expect.objectContaining({ hint: expect.stringContaining("app password"), responseCode: 535 })
+    );
 
     spy.mockRestore();
   });
