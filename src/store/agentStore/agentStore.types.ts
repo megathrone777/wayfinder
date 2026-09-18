@@ -1,10 +1,10 @@
-type TAgentStoreState = {
+export interface TAgentStoreState {
   activity: TAgentActivity;
   autonomyMode: TAgentAutonomyMode;
   messages: TAgentUIMessage[];
 };
 
-type TAgentStoreActions = {
+interface TAgentStoreActions {
   setActivity: (status: TAgentActivity) => void;
   setAutonomyMode: (autonomyMode: TAgentAutonomyMode) => void;
   setChatMessages: (messages: TAgentUIMessage[]) => void;

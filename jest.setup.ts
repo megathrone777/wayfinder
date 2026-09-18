@@ -4,10 +4,13 @@ import { fetch, Headers, Request, Response } from "undici";
 
 Object.assign(globalThis, { fetch, Headers, Request, Response });
 
-HTMLFormElement.prototype.requestSubmit = (submitter?: HTMLElement | null): void => {
+HTMLFormElement.prototype.requestSubmit = function (
+  this: HTMLFormElement,
+  submitter?: HTMLElement | null
+): void {
   const event = Object.assign(new Event("submit", { bubbles: true, cancelable: true }), {
     submitter: submitter ?? null,
   });
 
-  HTMLFormElement.prototype.dispatchEvent(event);
+  this.dispatchEvent(event);
 };

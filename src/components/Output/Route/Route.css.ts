@@ -17,24 +17,24 @@ export const captionClass = style(({ colors }) => ({
   fontSize: 14,
 }));
 
+const gridColor: string = rgba("255, 255, 255", 0.06);
+const gridSize: number = 30;
+
 export const plotClass = style(({ colors }) => ({
   backgroundColor: colors.black,
+  backgroundImage: `linear-gradient(to bottom, ${gridColor} 1px, transparent 1px), linear-gradient(to right, ${gridColor} 1px, transparent 1px)`,
+  backgroundSize: `${gridSize}px ${gridSize}px`,
   border: `1px solid ${rgba("255, 255, 255", 0.1)}`,
   borderRadius: 12,
+  height: 400,
   overflow: "hidden",
   position: "relative",
 }));
 
 export const svgClass = style({
   display: "block",
-  height: "auto",
+  height: "100%",
   width: "100%",
-});
-
-export const gridStrokeClass = style({
-  fill: "none",
-  stroke: rgba("255, 255, 255", 0.06),
-  strokeWidth: 1,
 });
 
 export const routeLineClass = style(({ colors, easing }) => ({

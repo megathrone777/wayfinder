@@ -4,7 +4,6 @@ import { Box } from "@/ui";
 
 import {
   captionClass,
-  gridStrokeClass,
   labelsClass,
   nodeClass,
   nodePrimaryClass,
@@ -51,7 +50,6 @@ const Route: React.FC = async () => {
   const response = await fetch(`${process.env.PUBLIC_URL}/mock/route.json`);
   const stops = (await response.json()) as TRouteStop[];
   const { d, length } = buildRoute(stops, true);
-  const gridId: string = "route-grid";
 
   return (
     <Box
@@ -67,25 +65,6 @@ const Route: React.FC = async () => {
           className={svgClass}
           viewBox={`0 0 ${width} ${height}`}
         >
-          <defs>
-            <pattern
-              height={30}
-              id={gridId}
-              patternUnits="userSpaceOnUse"
-              width={30}
-            >
-              <path
-                className={gridStrokeClass}
-                d="M30 0H0V30"
-              />
-            </pattern>
-          </defs>
-
-          <rect
-            {...{ height, width }}
-            fill={`url(#${gridId})`}
-          />
-
           <path
             {...{ d }}
             className={routeLineClass}

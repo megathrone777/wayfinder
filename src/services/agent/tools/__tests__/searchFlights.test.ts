@@ -1,43 +1,49 @@
 import { afterEach, beforeEach, describe, expect, it } from "@jest/globals";
 
-jest.mock("ai", () => ({ tool: (config: unknown): unknown => config }));
-
 import { searchFlights } from "../searchFlights";
 
-const makeFlight = (): TFlight => ({
-  airline: { code: "AA", name: "Air Alpha", region: "EU" },
-  cityFrom: "X",
-  cityTo: "Y",
+jest.mock("ai", () => ({ tool: (config: unknown): unknown => config }));
+
+const makeFlight = (id: string): TFlight => ({
+  airline: { code: id, name: `Airline ${id}`, region: "EU" },
+  cityFrom: "placeholder",
+  cityTo: "placeholder",
   price: { currency: "USD", total: 100 },
   schedule: { arrival: "12:00", departure: "10:00", duration: "2h" },
 });
 
+const pool = [makeFlight("a"), makeFlight("b"), makeFlight("c"), makeFlight("d"), makeFlight("e")];
+
 const run = (input: { cityFrom: string; cityTo: string }): Promise<TFlight[]> =>
-  (searchFlights.execute as unknown as (i: typeof input, o: unknown) => Promise<TFlight[]>)(
-    input,
-    {}
-  );
+  (
+    searchFlights.execute as unknown as (
+      i: typeof input,
+      o: unknown
+    ) => Promise<TFlight[]>
+  )(input, {});
 
 describe("searchFlights tool", () => {
   const originalFetch = global.fetch;
 
   beforeEach(() => {
-    process.env.FLIGHTS_API_URL = "https://api.example.com/flights";
+    process.env.PUBLIC_URL = "https://wayfinder.test";
+
+    global.fetch = jest.fn().mockResolvedValue({
+      json: () => Promise.resolve(pool),
+    }) as unknown as typeof fetch;
+
+    jest.spyOn(Math, "random").mockReturnValue(0.5);
   });
 
   afterEach(() => {
     global.fetch = originalFetch;
+    jest.restoreAllMocks();
   });
 
-  it("returns flights stamped with the requested cities", async () => {
-    global.fetch = jest.fn().mockResolvedValue({
-      json: () => Promise.resolve({ data: [makeFlight(), makeFlight()] }),
-      ok: true,
-    }) as unknown as typeof fetch;
-
+  it("stamps every flight with the requested cities", async () => {
     const flights = await run({ cityFrom: "Prague", cityTo: "Rome" });
 
-    expect(flights).toHaveLength(2);
+    expect(flights).toHaveLength(4);
 
     for (const flight of flights) {
       expect(flight.cityFrom).toBe("Prague");
@@ -45,22 +51,30 @@ describe("searchFlights tool", () => {
     }
   });
 
-  it("returns an empty array when the response is not ok", async () => {
-    global.fetch = jest.fn().mockResolvedValue({
-      json: () => Promise.resolve({ data: [makeFlight()] }),
-      ok: false,
-    }) as unknown as typeof fetch;
+  it("fetches flights from the public mock endpoint", async () => {
+    const fetchMock = jest.fn().mockResolvedValue({
+      json: () => Promise.resolve([]),
+    });
 
-    await expect(run({ cityFrom: "A", cityTo: "B" })).resolves.toEqual([]);
+    global.fetch = fetchMock as unknown as typeof fetch;
+    await run({ cityFrom: "Prague", cityTo: "Rome" });
+    expect(fetchMock).toHaveBeenCalledWith("https://wayfinder.test/mock/flights.json");
   });
 
-  it("returns an empty array when there are no flights", async () => {
+  it("returns the whole pool when it is smaller than the flights limit", async () => {
     global.fetch = jest.fn().mockResolvedValue({
-      json: () => Promise.resolve({ data: [] }),
-      ok: true,
+      json: () => Promise.resolve([makeFlight("a"), makeFlight("b")]),
     }) as unknown as typeof fetch;
 
-    await expect(run({ cityFrom: "A", cityTo: "B" })).resolves.toEqual([]);
+    await expect(run({ cityFrom: "Prague", cityTo: "Rome" })).resolves.toHaveLength(2);
+  });
+
+  it("returns an empty array when the endpoint has no flights", async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      json: () => Promise.resolve([]),
+    }) as unknown as typeof fetch;
+
+    await expect(run({ cityFrom: "Prague", cityTo: "Rome" })).resolves.toEqual([]);
   });
 
   it("declares an input schema with origin and destination", () => {

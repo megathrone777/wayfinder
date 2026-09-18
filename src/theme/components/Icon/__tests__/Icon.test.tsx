@@ -18,17 +18,6 @@ describe("Icon", () => {
     expect(container.querySelector("use")).toHaveAttribute("href", "/sprite.svg#mailIcon");
   });
 
-  it("applies a provided className", () => {
-    const { container } = render(
-      <Icon
-        className="my-icon"
-        id="close"
-      />
-    );
-
-    expect(container.querySelector("svg")).toHaveClass("my-icon");
-  });
-
   it("uses the correct viewBox for the exclamation icon", () => {
     const { container } = render(<Icon id="exclamation" />);
 

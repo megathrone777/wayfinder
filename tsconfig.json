@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
-    "allowArbitraryExtensions": true,
     "allowJs": true,
     "esModuleInterop": true,
     "importHelpers": true,
     "incremental": true,
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo",
     "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -15,6 +13,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo",
     "paths": {
       "@/*": ["./src/*"],
       "@/ui": ["./src/theme/components/"]

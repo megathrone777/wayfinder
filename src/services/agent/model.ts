@@ -1,6 +1,6 @@
-import { createAnthropic } from "@ai-sdk/anthropic";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 
-const anthropic = createAnthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-const model = anthropic("claude-haiku-4-5");
+const google = createGoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY });
+const model = google(process.env.GEMINI_MODEL);
 
 export { model };

@@ -29,6 +29,11 @@ export const textareaClass = style(({ colors }) => ({
     color: colors.grayLighter,
     letterSpacing: 1,
   },
+
+  ":disabled": {
+    cursor: "not-allowed",
+    opacity: 0.5,
+  },
 }));
 
 export const footerClass = style({

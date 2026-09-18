@@ -1,22 +1,4 @@
-import { globalStyle, rgba } from "@/theme";
-
-globalStyle("::-webkit-scrollbar", {
-  height: 11,
-  width: 11,
-});
-
-globalStyle("::-webkit-scrollbar-track", {
-  borderRadius: 10,
-});
-
-globalStyle("::-webkit-scrollbar-thumb", {
-  backgroundColor: rgba("255, 255, 255", 0.16),
-  borderRadius: 6,
-});
-
-globalStyle("::-webkit-scrollbar-thumb:hover", {
-  backgroundColor: rgba("255, 255, 255", 0.4),
-});
+import { globalStyle } from "@/theme";
 
 globalStyle("html, body", {
   height: "100%",

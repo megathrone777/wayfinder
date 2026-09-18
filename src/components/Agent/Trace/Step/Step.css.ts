@@ -189,6 +189,7 @@ export const statusClass = styleVariants(
 );
 
 export const iconClass = style({
+  color: "white",
   height: 12,
   transform: "translateY(1px)",
 });

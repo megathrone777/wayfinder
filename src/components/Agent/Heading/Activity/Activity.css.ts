@@ -6,7 +6,7 @@ export const wrapperClass = style(({ colors }) => ({
   borderStyle: "solid",
   borderWidth: 1,
   columnGap: 9,
-  display: "flex",
+  display: "inline-flex",
   fontSize: 14,
   fontWeight: 600,
   height: 38,
@@ -14,7 +14,6 @@ export const wrapperClass = style(({ colors }) => ({
   minHeight: 38,
   paddingInline: 13,
   whiteSpace: "nowrap",
-  width: "100%",
 
   "&.booking, &.building-itinerary, &.searching-flights, &.searching-stays": {
     backgroundColor: rgba(colors.blue, 0.12),

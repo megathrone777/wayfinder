@@ -2,6 +2,7 @@
 import React from "react";
 import { useShallow } from "zustand/react/shallow";
 
+import { useStickToBottom } from "@/hooks";
 import { agent } from "@/services";
 import { useAgentStore, useLayoutStore } from "@/store";
 
@@ -9,11 +10,18 @@ import { Flight } from "./Flight";
 import { Hotel } from "./Hotel";
 import { Itinerary } from "./Itinerary";
 
-import { wrapperClass, headerClass, hintClass, contentClass } from "./Results.css";
+import {
+  wrapperClass,
+  headerClass,
+  hintClass,
+  contentClass,
+  layoutClass,
+} from "./Results.css";
 
 import type { TProps } from "./Results.types";
 
 const Results: React.FC<TProps> = ({ children, placeholder }) => {
+  const { setContainer, setContent } = useStickToBottom();
   const { activity, messages } = useAgentStore(
     useShallow(({ activity, messages }) => ({
       activity,
@@ -75,18 +83,26 @@ const Results: React.FC<TProps> = ({ children, placeholder }) => {
         <p className={hintClass}>Output</p>
       </div>
 
-      <div className={contentClass}>
-        {flights || itinerary || hotels ? (
-          <>
-            {renderFlight()}
-            {renderItinerary()}
-            {renderHotel()}
-          </>
-        ) : (
-          placeholder
-        )}
+      <div
+        className={contentClass}
+        ref={setContainer}
+      >
+        <div
+          className={layoutClass}
+          ref={setContent}
+        >
+          {flights || itinerary || hotels ? (
+            <>
+              {renderFlight()}
+              {renderItinerary()}
+              {renderHotel()}
+            </>
+          ) : (
+            placeholder
+          )}
 
-        {activity === "trip-confirmed" && children}
+          {activity === "trip-confirmed" && children}
+        </div>
       </div>
     </div>
   );

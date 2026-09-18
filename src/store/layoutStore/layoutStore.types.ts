@@ -1,9 +1,9 @@
-type TLayoutStoreState = {
+export interface TLayoutStoreState {
   view: TLayoutView;
-};
+}
 
-type TLayoutStoreActions = {
+interface TLayoutStoreActions {
   setView: (view: TLayoutView) => void;
-};
+}
 
 export type TLayoutStore = TLayoutStoreState & TLayoutStoreActions;

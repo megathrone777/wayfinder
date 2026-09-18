@@ -62,15 +62,15 @@ export const hintClass = style(({ colors, fonts }) => ({
   textTransform: "uppercase",
 }));
 
-export const contentClass = style(({ devices, safeAreas }) => ({
-  display: "flex",
-  flexDirection: "column",
+export const contentClass = style(({ colors, devices, safeAreas }) => ({
   flexGrow: 1,
   height: "100%",
+  overflowAnchor: "none",
   overflowY: "auto",
   padding: 16,
-  rowGap: 18,
-  scrollbarWidth: "none",
+  scrollbarColor: `${rgba("255, 255, 255", 0.4)} ${colors.blackDarker}`,
+  scrollbarWidth: "thin",
+  scrollBehavior: "smooth",
 
   "@media": {
     [devices.pointerCoarse]: {
@@ -78,3 +78,9 @@ export const contentClass = style(({ devices, safeAreas }) => ({
     },
   },
 }));
+
+export const layoutClass = style({
+  display: "flex",
+  flexDirection: "column",
+  rowGap: 18,
+});

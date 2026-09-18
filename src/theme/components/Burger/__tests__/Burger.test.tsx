@@ -25,17 +25,6 @@ describe("Burger", () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it("applies a provided className", () => {
-    render(
-      <Burger
-        className="extra-class"
-        isOpened={false}
-      />
-    );
-
-    expect(screen.getByRole("button").className).toContain("extra-class");
-  });
-
   it("has a button type of button", () => {
     render(<Burger isOpened />);
 

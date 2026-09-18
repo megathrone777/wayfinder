@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it } from "@jest/globals";
 
-jest.mock("ai", () => ({ tool: (config: unknown): unknown => config }));
-
 import { assembleItinerary } from "../assembleItinerary";
+
+jest.mock("ai", () => ({ tool: (config: unknown): unknown => config }));
 
 const pool = [
   { id: "1", stops: ["a"], title: "Day A" },

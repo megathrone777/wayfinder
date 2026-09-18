@@ -103,6 +103,12 @@ const config = defineConfig([
       "@eslint-react/web-api-no-leaked-interval": "error",
       "@eslint-react/web-api-no-leaked-resize-observer": "error",
       "@eslint-react/web-api-no-leaked-timeout": "error",
+      "@eslint-react/jsx-no-useless-fragment": [
+        "error",
+        {
+          allowExpressions: false,
+        },
+      ],
 
       "@stylistic/comma-dangle": [
         "error",
@@ -114,7 +120,7 @@ const config = defineConfig([
           functions: "never",
           importAttributes: "always-multiline",
           dynamicImports: "always-multiline",
-          enums: "always-multiline",
+          enums: "never",
           generics: "never",
           tuples: "never",
         },
@@ -142,14 +148,12 @@ const config = defineConfig([
       "@stylistic/jsx-tag-spacing": "error",
       "@stylistic/quotes": ["error", "double"],
 
+      "@typescript-eslint/no-misused-promises": "off",
       "@typescript-eslint/consistent-type-imports": "error",
       "@typescript-eslint/explicit-function-return-type": "error",
       "@typescript-eslint/no-base-to-string": "off",
       "@typescript-eslint/no-explicit-any": "error",
-      "@typescript-eslint/no-misused-promises": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
-      "@typescript-eslint/no-unsafe-call": "off",
-      "@typescript-eslint/no-unsafe-return": "off",
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "_", varsIgnorePattern: "_" },
@@ -302,11 +306,7 @@ const config = defineConfig([
     },
   },
   {
-    files: [
-      "src/theme/utils/rgba.ts",
-      "src/theme/variables/colors.ts",
-      "**/*.{test,spec}.{ts,tsx}",
-    ],
+    files: ["src/theme/utils/rgba.ts", "src/theme/variables/colors.ts"],
     rules: {
       "no-restricted-syntax": "off",
     },

@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it } from "@jest/globals";
 
-jest.mock("ai", () => ({ tool: (config: unknown): unknown => config }));
-
 import { bookTrip } from "../bookTrip";
+
+jest.mock("ai", () => ({ tool: (config: unknown): unknown => config }));
 
 const run = (input: { itinerarySummary: string; totalPrice: number }): TBooking =>
   (bookTrip.execute as unknown as (i: typeof input, o: unknown) => TBooking)(input, {});
@@ -30,7 +30,7 @@ describe("bookTrip tool", () => {
     expect(booking.totalPrice).toBe(1500);
   });
 
-  it("stamps the booking with the current time as an ISO string", () => {
+  it("stamps the booking with the current time as settle whether the TS 7 question needs a real answer or just a ignoreBuildErrors: true + your own tsc --noEmitan ISO string", () => {
     const booking = run({ itinerarySummary: "Rome", totalPrice: 1 });
 
     expect(booking.bookedAt).toBe("2026-07-10T12:00:00.000Z");

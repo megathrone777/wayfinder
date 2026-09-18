@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it } from "@jest/globals";
 
-jest.mock("ai", () => ({ tool: (config: unknown): unknown => config }));
-
 import { searchHotels } from "../searchHotels";
+
+jest.mock("ai", () => ({ tool: (config: unknown): unknown => config }));
 
 const makeHotel = (id: string): THotel => ({
   amenities: ["wifi"],
