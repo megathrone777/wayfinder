@@ -23,8 +23,6 @@ const sendEmail = async (booking: TBooking): Promise<boolean> => {
     secure: smtpSecure,
   };
 
-  console.log(smtpOptions);
-
   try {
     const html = await generateTemplate({
       booking,
@@ -52,7 +50,7 @@ const sendEmail = async (booking: TBooking): Promise<boolean> => {
         responseCode === 535
           ? "Gmail rejected the SMTP credentials (535). Regenerate the app password at " +
             "https://myaccount.google.com/apppasswords (2-Step Verification must be on) and update " +
-            "EMAIL_APP_PASSWORD in Vercel, then redeploy."
+            "EMAIL_SMTP_PASSWORD in Vercel, then redeploy."
           : undefined,
       host: smtpHost,
       port: smtpPort,
